@@ -26,13 +26,13 @@ N 310 -210 310 -190 { lab=VDD}
 N 210 -130 260 -130 { lab=Vmin}
 N 360 -150 410 -150 { lab=#net1}
 N 210 -170 260 -170 { lab=Vpos}
-N 490 -150 520 -150 { lab=CompOut}
-C {devices/vdd.sym} 310 -210 0 0 {name=l1 lab=VDD}
-C {opamp_sky130.sym} 240 -100 0 0 {name=X1}
-C {devices/gnd.sym} 310 -70 0 0 {name=l2 lab=GND}
-C {sky130_tests/not.sym} 450 -150 0 0 {name=x1 m=10 
+N 490 -150 520 -150 { lab=Y}
+C {./symbols/vdd.sym} 310 -210 0 0 {name=l1 lab=VDD}
+C {symbols/opamp_sky130.sym} 240 -100 0 0 {name=X1}
+C {symbols/gnd.sym} 310 -70 0 0 {name=l2 lab=GND}
+C {symbols/not.sym} 450 -150 0 0 {name=x1 m=10 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
 + VCCPIN=VDD VSSPIN=GND}
-C {devices/ipin.sym} 210 -170 0 0 {name=p1 lab=Vpos}
-C {devices/ipin.sym} 210 -130 0 0 {name=p2 lab=Vmin}
-C {devices/opin.sym} 520 -150 0 0 {name=p3 lab=Y}
+C {symbols/ipin.sym} 210 -170 0 0 {name=p1 lab=Vpos}
+C {symbols/ipin.sym} 210 -130 0 0 {name=p2 lab=Vmin}
+C {symbols/opin.sym} 520 -150 0 0 {name=p3 lab=Y}

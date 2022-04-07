@@ -28,8 +28,8 @@ N 630 -150 630 -80 { lab=AGND}
 N 730 -170 800 -170 { lab=CompOut}
 N -770 -360 -770 -340 { lab=Vin}
 N -580 -360 -580 -340 { lab=AGND}
-N -1040 -540 -1040 -510 { lab=SH}
-N -1040 -540 -970 -540 { lab=SH}
+N -1040 -540 -1040 -510 { lab=#net1}
+N -1040 -540 -970 -540 { lab=#net1}
 N 800 -170 840 -170 { lab=CompOut}
 N 810 -170 810 -130 { lab=CompOut}
 N -470 -360 -470 -340 { lab=VREF}
@@ -40,17 +40,17 @@ N 380 430 380 450 { lab=c1v}
 N 580 -190 580 550 { lab=Vcommon}
 N 250 -130 250 240 { lab=c2v}
 N -50 240 250 240 { lab=c2v}
-N -720 -540 -720 -510 { lab=B1}
-N -720 -540 -650 -540 { lab=B1}
+N -720 -540 -720 -510 { lab=#net2}
+N -720 -540 -650 -540 { lab=#net2}
 N 250 240 250 270 { lab=c2v}
 N 220 270 250 270 { lab=c2v}
-N -240 -530 -240 -500 { lab=B0}
-N -240 -530 -170 -530 { lab=B0}
+N -240 -530 -240 -500 { lab=#net3}
+N -240 -530 -170 -530 { lab=#net3}
 N 120 100 140 100 { lab=c3v}
 N -50 -110 30 -110 { lab=c4v}
 N 30 -130 30 -110 { lab=c4v}
-N -730 -690 -730 -660 { lab=B2}
-N -730 -690 -660 -690 { lab=B2}
+N -730 -690 -730 -660 { lab=#net4}
+N -730 -690 -660 -690 { lab=#net4}
 N 30 -110 30 -90 { lab=c4v}
 N 10 -90 30 -90 { lab=c4v}
 N 150 10 150 70 { lab=c3v}
@@ -87,7 +87,7 @@ N -800 130 -430 130 { lab=VREF}
 N -800 300 -430 300 { lab=VREF}
 N -720 320 -430 320 { lab=AGND}
 N -800 -150 -800 300 { lab=VREF}
-N -130 550 -60 550 { lab=#net1}
+N -130 550 -60 550 { lab=#net5}
 N -530 460 -440 460 { lab=SH}
 N -650 420 -440 420 { lab=Vin}
 N -720 440 -440 440 { lab=AGND}
@@ -97,12 +97,12 @@ N -980 -150 -980 -10 { lab=B2}
 N 150 70 150 100 { lab=c3v}
 N 140 100 150 100 { lab=c3v}
 N -40 70 150 70 { lab=c3v}
-N -60 550 60 550 { lab=#net1}
+N -60 550 60 550 { lab=#net5}
 N 120 550 580 550 { lab=Vcommon}
 N -660 -360 -580 -360 { lab=AGND}
 N -660 -360 -660 -340 { lab=AGND}
 N -660 -280 -580 -280 { lab=GND}
-C {devices/code.sym} 60 -395 0 0 {name=NGSPICE
+C {symbols/code.sym} 60 -395 0 0 {name=xGSPICE
 only_toplevel=true
 value="
 .include "opamp_subckt.sp"
@@ -119,7 +119,7 @@ plot v(c1v) v(c2v)+2 v(c3v)+4 v(c4v)+6
 plot v(CompOut)
 .endc
 " }
-C {devices/code.sym} 200 -390 0 0 {name=TT_MODELS
+C {symbols/code.sym} 200 -390 0 0 {name=xT_MODELS
 only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -128,45 +128,45 @@ value="
 
 "
 spice_ignore=false}
-C {devices/vsource.sym} -870 -310 0 0 {name=Vmax value=2}
-C {devices/gnd.sym} -870 -280 0 0 {name=l3 lab=GND}
-C {devices/vdd.sym} -870 -340 0 0 {name=l4 lab=VDD}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 380 -160 0 0 {name=C1 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
-C {devices/lab_wire.sym} 630 -80 0 0 {name=l6 sig_type=std_logic lab=AGND}
-C {devices/vsource.sym} -770 -310 0 0 {name=Vmax1 value=\{vadc\}}
-C {devices/gnd.sym} -770 -280 0 0 {name=l14 lab=GND}
-C {devices/vsource.sym} -580 -310 0 0 {name=Vmax3 value=1}
-C {devices/gnd.sym} -580 -280 0 0 {name=l18 lab=GND}
-C {devices/lab_wire.sym} -770 -360 0 0 {name=l17 sig_type=std_logic lab=Vin}
-C {devices/lab_wire.sym} -580 -360 0 0 {name=l20 sig_type=std_logic lab=AGND}
-C {devices/vsource.sym} -1040 -480 0 0 {name=V4 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0)"}
-C {devices/gnd.sym} -1040 -450 0 0 {name=l21 lab=GND}
-C {devices/lab_pin.sym} -970 -540 0 1 {name=l22 sig_type=std_logic lab=SH}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 810 -100 0 0 {name=C5 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
-C {devices/gnd.sym} 810 -70 0 0 {name=l29 lab=GND}
-C {devices/lab_wire.sym} 840 -170 0 0 {name=l30 sig_type=std_logic lab=CompOut}
-C {devices/vsource.sym} -470 -310 0 0 {name=Vmax4 value=2}
-C {devices/gnd.sym} -470 -280 0 0 {name=l31 lab=GND}
-C {devices/lab_wire.sym} -470 -360 0 0 {name=l32 sig_type=std_logic lab=VREF}
-C {devices/lab_wire.sym} -180 -190 0 0 {name=l33 sig_type=std_logic lab=Vcommon}
-C {devices/lab_wire.sym} 350 450 0 0 {name=l37 sig_type=std_logic lab=c1v}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 250 -160 0 0 {name=C2 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
-C {devices/vsource.sym} -720 -480 0 0 {name=V1 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t4\} 0 \{t4r\} 2 \{t5\} 2 \{t5r\} \{b1d\})"}
-C {devices/gnd.sym} -720 -450 0 0 {name=l8 lab=GND}
-C {devices/lab_pin.sym} -650 -540 0 1 {name=l11 sig_type=std_logic lab=B1}
-C {devices/lab_wire.sym} 220 270 0 0 {name=l23 sig_type=std_logic lab=c2v}
-C {skywater_comparator.sym} 610 -220 2 1 {name=x3}
-C {devices/vsource.sym} -240 -470 0 0 {name=V3 value="dc 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t6\} 0 \{t6r\} 2 \{t7\} 2 \{t7r\} \{b0d\})"}
-C {devices/gnd.sym} -240 -440 0 0 {name=l25 lab=GND}
-C {devices/lab_pin.sym} -170 -530 0 1 {name=l26 sig_type=std_logic lab=B0}
-C {devices/lab_wire.sym} 120 100 0 0 {name=l27 sig_type=std_logic lab=c3v}
-C {devices/vsource.sym} -730 -630 0 0 {name=V5 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t2\} 0 \{t2r\} 2 \{t3\} 2 \{t3r\} \{b2d\})"}
-C {devices/gnd.sym} -730 -600 0 0 {name=l34 lab=GND}
-C {devices/lab_pin.sym} -660 -690 0 1 {name=l35 sig_type=std_logic lab=B2}
-C {devices/lab_wire.sym} 10 -90 0 0 {name=l36 sig_type=std_logic lab=c4v}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 30 -160 0 0 {name=C6 model=cap_mim_m3_1 W=10 L=10 MF=4 spiceprefix=X}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 150 -20 0 0 {name=C7 model=cap_mim_m3_1 W=10 L=10 MF=2 spiceprefix=X}
-C {devices/code.sym} -90 -390 0 0 {name=CodeHeader only_toplevel=true place=header
+C {symbols/vsource.sym} -870 -310 0 0 {name=Vmax value=2}
+C {symbols/gnd.sym} -870 -280 0 0 {name=l3 lab=GND}
+C {symbols/vdd.sym} -870 -340 0 0 {name=l4 lab=VDD}
+C {symbols/cap_mim_m3_1.sym} 380 -160 0 0 {name=C1 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/lab_wire.sym} 630 -80 0 0 {name=l6 sig_type=std_logic lab=AGND}
+C {symbols/vsource.sym} -770 -310 0 0 {name=Vmax1 value=\{vadc\}}
+C {symbols/gnd.sym} -770 -280 0 0 {name=l14 lab=GND}
+C {symbols/vsource.sym} -580 -310 0 0 {name=Vmax3 value=1}
+C {symbols/gnd.sym} -580 -280 0 0 {name=l18 lab=GND}
+C {symbols/lab_wire.sym} -770 -360 0 0 {name=l17 sig_type=std_logic lab=Vin}
+C {symbols/lab_wire.sym} -580 -360 0 0 {name=l20 sig_type=std_logic lab=AGND}
+C {symbols/vsource.sym} -1040 -480 0 0 {name=V4 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0)"}
+C {symbols/gnd.sym} -1040 -450 0 0 {name=l21 lab=GND}
+C {symbols/lab_pin.sym} -970 -540 0 1 {name=x22 sig_type=std_logic lab=SH}
+C {symbols/cap_mim_m3_1.sym} 810 -100 0 0 {name=C5 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/gnd.sym} 810 -70 0 0 {name=l29 lab=GND}
+C {symbols/lab_wire.sym} 840 -170 0 0 {name=l30 sig_type=std_logic lab=CompOut}
+C {symbols/vsource.sym} -470 -310 0 0 {name=Vmax4 value=2}
+C {symbols/gnd.sym} -470 -280 0 0 {name=l31 lab=GND}
+C {symbols/lab_wire.sym} -470 -360 0 0 {name=l32 sig_type=std_logic lab=VREF}
+C {symbols/lab_wire.sym} -180 -190 0 0 {name=l33 sig_type=std_logic lab=Vcommon}
+C {symbols/lab_wire.sym} 350 450 0 0 {name=l37 sig_type=std_logic lab=c1v}
+C {symbols/cap_mim_m3_1.sym} 250 -160 0 0 {name=C2 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/vsource.sym} -720 -480 0 0 {name=V1 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t4\} 0 \{t4r\} 2 \{t5\} 2 \{t5r\} \{b1d\})"}
+C {symbols/gnd.sym} -720 -450 0 0 {name=l8 lab=GND}
+C {symbols/lab_pin.sym} -650 -540 0 1 {name=x11 sig_type=std_logic lab=B1}
+C {symbols/lab_wire.sym} 220 270 0 0 {name=l23 sig_type=std_logic lab=c2v}
+C {symbols/skywater_comparator.sym} 610 -220 2 1 {name=x3}
+C {symbols/vsource.sym} -240 -470 0 0 {name=V3 value="dc 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t6\} 0 \{t6r\} 2 \{t7\} 2 \{t7r\} \{b0d\})"}
+C {symbols/gnd.sym} -240 -440 0 0 {name=l25 lab=GND}
+C {symbols/lab_pin.sym} -170 -530 0 1 {name=x26 sig_type=std_logic lab=B0}
+C {symbols/lab_wire.sym} 120 100 0 0 {name=l27 sig_type=std_logic lab=c3v}
+C {symbols/vsource.sym} -730 -630 0 0 {name=V5 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t2\} 0 \{t2r\} 2 \{t3\} 2 \{t3r\} \{b2d\})"}
+C {symbols/gnd.sym} -730 -600 0 0 {name=l34 lab=GND}
+C {symbols/lab_pin.sym} -660 -690 0 1 {name=x35 sig_type=std_logic lab=B2}
+C {symbols/lab_wire.sym} 10 -90 0 0 {name=l36 sig_type=std_logic lab=c4v}
+C {symbols/cap_mim_m3_1.sym} 30 -160 0 0 {name=C6 model=cap_mim_m3_1 W=10 L=10 MF=4 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 150 -20 0 0 {name=C7 model=cap_mim_m3_1 W=10 L=10 MF=2 spiceprefix=X}
+C {symbols/code.sym} -90 -390 0 0 {name=xodeHeader only_toplevel=true place=header
 value="
 .param vONE=2
 .param AGND=1
@@ -194,17 +194,17 @@ value="
 .param vadc=(b2d/4)+(b1d/8)+(b0d/16)+AGND
 
 "}
-C {4x1analogmux.sym} -290 -60 0 0 {name=x1}
-C {4x1analogmux.sym} -280 120 0 0 {name=x2}
-C {4x1analogmux.sym} -280 290 0 0 {name=x4}
-C {devices/ipin.sym} -650 -150 1 0 {name=p2 lab=Vin}
-C {devices/ipin.sym} -720 -150 1 0 {name=p3 lab=AGND}
-C {devices/ipin.sym} -800 -150 1 0 {name=p4 lab=VREF}
-C {devices/ipin.sym} -530 -160 1 0 {name=p6 lab=SH}
-C {devices/ipin.sym} -1100 -150 1 0 {name=p8 lab=B0}
-C {devices/ipin.sym} -1040 -150 1 0 {name=p9 lab=B1}
-C {devices/ipin.sym} -980 -150 1 0 {name=p10 lab=B2}
-C {2x1analogmux.sym} -290 440 0 0 {name=x5}
-C {analog_switch.sym} -280 560 0 0 {name=x6}
-C {devices/vsource.sym} 90 550 3 0 {name=Vswitch value=0}
-C {sky130_fd_pr/cap_mim_m3_1.sym} -660 -310 0 0 {name=C3 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/4x1analogmux.sym} -290 -60 0 0 {name=x1}
+C {symbols/4x1analogmux.sym} -280 120 0 0 {name=x2}
+C {symbols/4x1analogmux.sym} -280 290 0 0 {name=x4}
+C {symbols/ipin.sym} -650 -150 1 0 {name=p2 lab=Vin}
+C {symbols/ipin.sym} -720 -150 1 0 {name=p3 lab=AGND}
+C {symbols/ipin.sym} -800 -150 1 0 {name=p4 lab=VREF}
+C {symbols/ipin.sym} -530 -160 1 0 {name=p6 lab=SH}
+C {symbols/ipin.sym} -1100 -150 1 0 {name=p8 lab=B0}
+C {symbols/ipin.sym} -1040 -150 1 0 {name=p9 lab=B1}
+C {symbols/ipin.sym} -980 -150 1 0 {name=p10 lab=B2}
+C {symbols/2x1analogmux.sym} -290 440 0 0 {name=x5}
+C {symbols/analog_switch.sym} -280 560 0 0 {name=x6}
+C {symbols/vsource.sym} 90 550 3 0 {name=Vswitch value=0}
+C {symbols/cap_mim_m3_1.sym} -660 -310 0 0 {name=C3 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
