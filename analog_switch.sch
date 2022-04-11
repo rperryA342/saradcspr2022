@@ -10,13 +10,13 @@ N -190 -30 -190 30 { lab=S}
 N -190 30 -70 30 { lab=S}
 N -70 -10 -70 30 { lab=S}
 N -70 -10 -10 -10 { lab=S}
-N 290 -30 340 -30 { lab=#net2}
-N 340 -60 340 -30 { lab=#net2}
+N 290 -30 340 -30 { lab=Vin}
+N 340 -60 340 -30 { lab=Vin}
 N 290 -10 360 -10 { lab=Vout}
-C {symbols/dacpassgate.sym} 140 -20 0 0 {name=x1}
+C {dacpassgate.sym} 140 -20 0 0 {name=x1}
 C {symbols/ipin.sym} -210 -30 0 0 {name=p1 lab=S}
 C {symbols/ipin.sym} 340 -60 1 0 {name=p2 lab=Vin}
 C {symbols/opin.sym} 360 -10 0 0 {name=p3 lab=Vout}
-C {symbols/not.sym} -120 -30 0 0 {name=x4 m=10 
+C {not.sym} -120 -30 0 0 {name=x2 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
-+ VCCPIN=VDD VSSPIN=GND}
++ VCCPIN=VCC VSSPIN=VSS}
