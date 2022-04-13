@@ -1,0 +1,47 @@
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/sar3bitsreg_test.sch
+
+
+.param vONE=2
+.param vADC=1
+
+
+**.subckt sar3bitsreg_test
+Vmax VDD GND 2
+x3 net4 net3 net2 net9 net1 GND VDD clock net7 net6 net5 net8 nStartCnv reset sar3bitsReg
+V4 reset GND DC 0 pwl (0n 0 1u 0 1010n 2)
+V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
+V3 nStartCnv GND dc 2 pwl (0n 2 3u 2 3010n 0)
+XC1 net9 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC2 net5 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC3 net6 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC4 net7 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC5 net8 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC6 net4 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC7 net3 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC8 net1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+XC9 net2 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+**** begin user architecture code
+
+
+
+.include ./spice/sar3bitsreg.sp
+
+.op
+.control
+run
+
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+**.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.GLOBAL VDD
+.end

@@ -20,60 +20,80 @@ K {}
 V {}
 S {}
 E {}
-N 140 -580 140 -560 { lab=Vin}
-N 330 -580 330 -560 { lab=AGND}
-N 440 -580 440 -560 { lab=VREF}
-N 400 -290 690 -290 { lab=dacVin}
-N 550 -320 550 -220 { lab=B2}
-N 550 -330 690 -330 { lab=B2}
-N 550 -330 550 -320 { lab=B2}
-N 590 -350 690 -350 { lab=B1}
-N 590 -350 590 -220 { lab=B1}
-N 630 -370 630 -220 { lab=B[0]}
-N 630 -370 690 -370 { lab=B[0]}
-N 430 -410 430 -220 { lab=SH}
-N 430 -410 690 -410 { lab=SH}
-N 660 -310 690 -310 { lab=AGND}
-N 660 -310 660 -260 { lab=AGND}
-N 490 -390 690 -390 { lab=VREF}
-N 490 -390 490 -350 { lab=VREF}
-N 1090 -410 1090 -80 { lab=CompOut}
-N 900 -80 990 -80 { lab=CompOut}
-N 100 -220 430 -220 { lab=SH}
-N 100 -270 100 -220 { lab=SH}
-N 50 -290 100 -290 { lab=Vin}
 N 30 -790 30 -760 { lab=reset}
 N 30 -790 100 -790 { lab=reset}
 N 350 -790 350 -760 { lab=clock}
 N 350 -790 420 -790 { lab=clock}
 N 830 -780 830 -750 { lab=nStartCnv}
 N 830 -780 900 -780 { lab=nStartCnv}
-N 990 -410 1090 -410 { lab=CompOut}
-N 990 -80 1090 -80 { lab=CompOut}
-C {dacblock.sym} 840 -350 0 0 {name=x1}
-C {ug_sample_hold.sym} 250 -280 0 0 {name=x2}
+N 430 -290 430 -220 {
+lab=#net1}
+N 550 -320 550 -220 {
+lab=#net2}
+N 590 -360 590 -220 {
+lab=#net3}
+N 630 -400 630 -220 {
+lab=#net4}
+N 220 -360 590 -360 {
+lab=#net3}
+N 340 -290 430 -290 {
+lab=#net1}
+N 900 20 1180 20 {
+lab=#net5}
+N 900 50 1060 50 {
+lab=#net6}
+N 900 80 980 80 {
+lab=#net7}
+N 900 120 940 120 {
+lab=#net8}
+N 1160 180 1260 180 {
+lab=GND}
+N 1260 -20 1260 180 {
+lab=GND}
+N 900 -80 1260 -80 {
+lab=#net9}
+N 1160 80 1160 180 {
+lab=GND}
+N 1050 110 1050 180 {
+lab=GND}
+N 230 -230 480 -230 {
+lab=GND}
+N 140 -330 140 -230 {
+lab=GND}
+N 230 -300 230 -230 {
+lab=GND}
+N 140 -400 630 -400 {
+lab=#net4}
+N 140 -400 140 -390 {
+lab=#net4}
+N 970 140 970 180 {
+lab=GND}
+N 480 -260 480 -230 {
+lab=GND}
+N 1050 180 1160 180 {
+lab=GND}
+N 970 180 1050 180 {
+lab=GND}
+N 140 -230 230 -230 {
+lab=GND}
+N 120 -400 140 -400 {
+lab=#net4}
+N 930 180 970 180 {
+lab=GND}
+N 480 -320 550 -320 {
+lab=#net2}
 C {symbols/vsource.sym} 40 -530 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} 40 -500 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} 40 -560 0 0 {name=l4 lab=VDD}
-C {symbols/vsource.sym} 140 -530 0 0 {name=Vmax1 value=\{vadc\}}
-C {symbols/gnd.sym} 140 -500 0 0 {name=l14 lab=GND}
-C {symbols/vsource.sym} 330 -530 0 0 {name=Vmax3 value=1}
-C {symbols/gnd.sym} 330 -500 0 0 {name=l18 lab=GND}
-C {symbols/lab_wire.sym} 140 -580 0 0 {name=l17 sig_type=std_logic lab=Vin}
-C {symbols/lab_wire.sym} 330 -580 0 0 {name=l20 sig_type=std_logic lab=AGND}
-C {symbols/vsource.sym} 440 -530 0 0 {name=Vmax4 value=2}
-C {symbols/gnd.sym} 440 -500 0 0 {name=l31 lab=GND}
-C {symbols/lab_wire.sym} 440 -580 0 0 {name=l32 sig_type=std_logic lab=VREF}
 C {symbols/code.sym} 720 -595 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "./spice/opamp_sky130.sp"
+
 .include "./spice/sar3bitsreg.sp"
 
 .op
 .control
 run
-**plot i(Vswitch)
 
 .endc
 " }
@@ -84,18 +104,16 @@ value="
 ** opencircuitdesign pdks install
 .lib $::SKYWATER_MODELS/sky130.lib.spice tt
 .include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
+**.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
 
 "
 spice_ignore=false}
 C {symbols/code.sym} 570 -590 0 0 {name=codeHeader only_toplevel=true place=header
 value="
 .param vONE=2
+.param vADC=1
 "}
 C {sar3bitsReg.sym} 330 390 0 0 {name=x3}
-C {symbols/lab_wire.sym} 490 -350 0 0 {name=l1 sig_type=std_logic lab=VREF}
-C {symbols/lab_wire.sym} 660 -260 0 1 {name=l2 sig_type=std_logic lab=AGND}
-C {symbols/lab_wire.sym} 50 -290 0 0 {name=l5 sig_type=std_logic lab=Vin}
 C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 1u 0 1010n 2)"}
 C {symbols/gnd.sym} 30 -700 0 0 {name=l21 lab=GND}
 C {symbols/lab_pin.sym} 100 -790 0 1 {name=x22 sig_type=std_logic lab=reset}
@@ -105,18 +123,19 @@ C {symbols/lab_pin.sym} 420 -790 0 1 {name=x11 sig_type=std_logic lab=clock}
 C {symbols/vsource.sym} 830 -720 0 0 {name=V3 value="dc 2 pwl (0n 2 3u 2 3010n 0)"}
 C {symbols/gnd.sym} 830 -690 0 0 {name=l25 lab=GND}
 C {symbols/lab_pin.sym} 900 -780 0 1 {name=x26 sig_type=std_logic lab=nStartCnv}
-C {symbols/opin.sym} 900 20 0 0 {name=p1 lab=dataOut[2]}
-C {symbols/opin.sym} 900 50 0 0 {name=p2 lab=dataOut[1]}
-C {symbols/opin.sym} 900 80 0 0 {name=p3 lab=dataOut[0]}
-C {symbols/opin.sym} 900 120 0 0 {name=p4 lab=nEndCnv}
 C {symbols/lab_pin.sym} 220 -30 0 0 {name=x4 sig_type=std_logic lab=nStartCnv}
 C {symbols/lab_pin.sym} 220 20 0 0 {name=x5 sig_type=std_logic lab=clock}
 C {symbols/lab_pin.sym} 220 60 0 0 {name=x6 sig_type=std_logic lab=reset}
 C {symbols/gnd.sym} 570 250 0 0 {name=l7 lab=GND}
 C {symbols/lab_pin.sym} 490 250 0 0 {name=x7 sig_type=std_logic lab=VDD}
-C {symbols/lab_wire.sym} 100 -220 0 0 {name=l6 sig_type=std_logic lab=SH}
-C {symbols/lab_wire.sym} 630 -370 0 0 {name=l9 sig_type=std_logic lab=B0}
-C {symbols/lab_wire.sym} 590 -350 0 0 {name=l10 sig_type=std_logic lab=B1}
-C {symbols/lab_wire.sym} 550 -330 0 0 {name=l11 sig_type=std_logic lab=B2}
-C {symbols/lab_wire.sym} 1090 -410 0 1 {name=l12 sig_type=std_logic lab=CompOut}
-C {symbols/lab_wire.sym} 520 -290 0 0 {name=l13 sig_type=std_logic lab=dacVin}
+C {symbols/cap_mim_m3_1.sym} 1260 -50 0 0 {name=C1 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 1160 50 0 0 {name=C2 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 1050 80 0 0 {name=C3 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 970 110 0 0 {name=C4 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 930 150 0 0 {name=C5 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/gnd.sym} 1090 180 0 0 {name=l1 lab=GND}
+C {symbols/cap_mim_m3_1.sym} 140 -360 0 0 {name=C6 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 230 -330 0 0 {name=C7 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/cap_mim_m3_1.sym} 350 -260 0 0 {name=C8 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/gnd.sym} 230 -230 0 0 {name=l2 lab=GND}
+C {symbols/cap_mim_m3_1.sym} 480 -290 0 0 {name=C9 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}

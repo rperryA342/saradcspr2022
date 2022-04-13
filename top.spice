@@ -1,4 +1,4 @@
-** sch_path: /home/rperry/saradcspr2022/top.sch
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/top.sch
 
 
 .param vONE=2
@@ -9,13 +9,13 @@
 *.opin dataOut[1]
 *.opin dataOut[0]
 *.opin nEndCnv
-x1 CompOut SH VREF B[0] B[1] B[2] AGND net1 dacblock
-x2 net1 Vin SH ug_sample_hold
+x1 CompOut SH VREF B0 B1 B2 AGND dacVin dacblock
+x2 dacVin Vin SH ug_sample_hold
 Vmax VDD GND 2
 Vmax1 Vin GND {vadc}
 Vmax3 AGND GND 1
 Vmax4 VREF GND 2
-x3 B[0] B[1] B[2] CompOut SH GND VDD clock dataOut[0] dataOut[1] dataOut[2] nEndCnv nStartCnv reset
+x3 B0 B1 B2 CompOut SH GND VDD clock dataOut[0] dataOut[1] dataOut[2] nEndCnv nStartCnv reset
 + sar3bitsReg
 V4 reset GND DC 0 pwl (0n 0 1u 0 1010n 2)
 V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
@@ -24,32 +24,29 @@ V3 nStartCnv GND dc 2 pwl (0n 2 3u 2 3010n 0)
 
 
 .include ./spice/opamp_sky130.sp
-.include sar3bitsReg.sp
+.include ./spice/sar3bitsreg.sp
 
-.tran 0.1 2000n
+.op
 .control
 run
 **plot i(Vswitch)
-write dacpassgate_testcircuit_v2.raw
-plot v(SH) v(B0)+2 v(B1)+4 v(B2)+6
-plot v(Vin)  v(vCommon)
-**plot v(AGND)
-plot v(c1v) v(c2v)+2 v(c3v)+4 v(c4v)+6
-plot v(CompOut)
+
 .endc
 
 
 
 ** opencircuitdesign pdks install
 .lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
 
 
 **** end user architecture code
 **.ends
 
 * expanding   symbol:  dacblock.sym # of pins=8
-** sym_path: /home/rperry/saradcspr2022/dacblock.sym
-** sch_path: /home/rperry/saradcspr2022/dacblock.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacblock.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacblock.sch
 .subckt dacblock  CompOut SH VREF B0 B1 B2 AGND Vin
 *.ipin Vin
 *.ipin AGND
@@ -73,8 +70,8 @@ x6 AGND SH Vcommon analog_switch
 
 
 * expanding   symbol:  ug_sample_hold.sym # of pins=3
-** sym_path: /home/rperry/saradcspr2022/ug_sample_hold.sym
-** sch_path: /home/rperry/saradcspr2022/ug_sample_hold.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sch
 .subckt ug_sample_hold  Vout Vin SHClk
 *.ipin Vin
 *.ipin SHClk
@@ -86,8 +83,8 @@ X1 Vout net1 Vout VDD GND opamp_sky130
 
 
 * expanding   symbol:  skywater_comparator.sym # of pins=3
-** sym_path: /home/rperry/saradcspr2022/skywater_comparator.sym
-** sch_path: /home/rperry/saradcspr2022/skywater_comparator.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/skywater_comparator.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/skywater_comparator.sch
 .subckt skywater_comparator  Vmin Vpos Y
 *.ipin Vpos
 *.ipin Vmin
@@ -98,8 +95,8 @@ x2 Vmin Vpos net1 VDD GND opamp_sky130
 
 
 * expanding   symbol:  4x1analogmux.sym # of pins=7
-** sym_path: /home/rperry/saradcspr2022/4x1analogmux.sym
-** sch_path: /home/rperry/saradcspr2022/4x1analogmux.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/4x1analogmux.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/4x1analogmux.sch
 .subckt 4x1analogmux  Vout S1 A3 A2 A1 A0 S0
 *.ipin A3
 *.ipin A2
@@ -115,8 +112,8 @@ x1 net1 A3 A2 S0 2x1analogmux
 
 
 * expanding   symbol:  2x1analogmux.sym # of pins=4
-** sym_path: /home/rperry/saradcspr2022/2x1analogmux.sym
-** sch_path: /home/rperry/saradcspr2022/2x1analogmux.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/2x1analogmux.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/2x1analogmux.sch
 .subckt 2x1analogmux  Vout A1 A0 S
 *.ipin S
 *.opin Vout
@@ -129,8 +126,8 @@ x3 net1 S VCC VSS not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 
 
 * expanding   symbol:  analog_switch.sym # of pins=3
-** sym_path: /home/rperry/saradcspr2022/analog_switch.sym
-** sch_path: /home/rperry/saradcspr2022/analog_switch.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/analog_switch.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/analog_switch.sch
 .subckt analog_switch  Vin S Vout
 *.ipin S
 *.ipin Vin
@@ -141,8 +138,8 @@ x2 net1 S VCC VSS not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 
 
 * expanding   symbol:  not.sym # of pins=2
-** sym_path: /home/rperry/saradcspr2022/not.sym
-** sch_path: /home/rperry/saradcspr2022/not.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/not.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/not.sch
 .subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
 *.opin y
 *.ipin a
@@ -156,8 +153,8 @@ XM2 y a VCCPIN VCCPIN sky130_fd_pr__pfet_01v8 L=L_P W=W_P nf=1 ad='int((nf+1)/2)
 
 
 * expanding   symbol:  dacpassgate.sym # of pins=4
-** sym_path: /home/rperry/saradcspr2022/dacpassgate.sym
-** sch_path: /home/rperry/saradcspr2022/dacpassgate.sch
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacpassgate.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacpassgate.sch
 .subckt dacpassgate  GP A Z GN
 *.iopin A
 *.iopin Z

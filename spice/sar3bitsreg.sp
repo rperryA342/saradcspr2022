@@ -2,7 +2,7 @@
 
 
 
-.subckt sar3bits B[0] B[1] B[2] CompOut SH VGND VPWR clock dataOut[0] dataOut[1] dataOut[2]
+.subckt sar3bitsreg B[0] B[1] B[2] CompOut SH VGND VPWR clock dataOut[0] dataOut[1] dataOut[2]
 + nEndCnv nStartCnv reset
 X_49_ _63_/CLK _49_/D input3/X VGND VGND VPWR VPWR _56_/D sky130_fd_sc_hd__dfrtp_2
 XFILLER_9_77 VGND VGND VPWR VPWR sky130_fd_sc_hd__decap_8
