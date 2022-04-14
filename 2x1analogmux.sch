@@ -48,4 +48,4 @@ C {symbols/ipin.sym} 160 -140 0 0 {name=p5 lab=A1}
 C {symbols/ipin.sym} 270 -140 0 0 {name=p6 lab=A0}
 C {not.sym} 80 210 0 0 {name=x3 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
-+ VCCPIN=VCC VSSPIN=VSS}
++ VCCPIN=VDD VSSPIN=GND}

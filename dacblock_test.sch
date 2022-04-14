@@ -30,7 +30,7 @@ N -770 -360 -770 -340 { lab=Vin}
 N -580 -360 -580 -340 { lab=AGND}
 N -1040 -540 -1040 -510 { lab=SH}
 N -1040 -540 -970 -540 { lab=SH}
-N 800 -170 840 -170 { lab=xxx}
+N 800 -170 840 -170 { lab=CompOut}
 N 810 -170 810 -130 { lab=CompOut}
 N -470 -360 -470 -340 { lab=VREF}
 N -50 -190 -10 -190 { lab=Vcommon}
@@ -102,12 +102,12 @@ N 120 550 580 550 { lab=Vcommon}
 N -660 -360 -580 -360 { lab=AGND}
 N -660 -360 -660 -340 { lab=AGND}
 N -660 -280 -580 -280 { lab=GND}
-C {symbols/code.sym} 60 -395 0 0 {name=xGSPICE
+C {symbols/code.sym} 60 -395 0 0 {name=NGSPICE
 only_toplevel=true
 value="
 .include "opamp_sky130.sp"
 
-.tran 0.1 2000n
+.tran 0.1u 2u
 .control
 run
 **plot i(Vswitch)
@@ -119,7 +119,7 @@ plot v(c1v) v(c2v)+2 v(c3v)+4 v(c4v)+6
 plot v(CompOut)
 .endc
 " }
-C {symbols/code.sym} 200 -390 0 0 {name=xT_MODELS
+C {symbols/code.sym} 200 -390 0 0 {name=TT_MODELS
 only_toplevel=true
 format="tcleval( @value )"
 value="
@@ -166,7 +166,7 @@ C {symbols/lab_pin.sym} -660 -690 0 1 {name=x35 sig_type=std_logic lab=B2}
 C {symbols/lab_wire.sym} 10 -90 0 0 {name=l36 sig_type=std_logic lab=c4v}
 C {symbols/cap_mim_m3_1.sym} 30 -160 0 0 {name=C6 model=cap_mim_m3_1 W=10 L=10 MF=4 spiceprefix=X}
 C {symbols/cap_mim_m3_1.sym} 150 -20 0 0 {name=C7 model=cap_mim_m3_1 W=10 L=10 MF=2 spiceprefix=X}
-C {symbols/code.sym} -90 -390 0 0 {name=xodeHeader only_toplevel=true place=header
+C {symbols/code.sym} -90 -390 0 0 {name=codeHeader only_toplevel=true place=header
 value="
 .param vONE=2
 .param AGND=1

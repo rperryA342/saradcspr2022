@@ -27,31 +27,31 @@ N 350 -790 420 -790 { lab=clock}
 N 830 -780 830 -750 { lab=nStartCnv}
 N 830 -780 900 -780 { lab=nStartCnv}
 N 430 -290 430 -220 {
-lab=#net1}
+lab=SH}
 N 550 -320 550 -220 {
-lab=#net2}
+lab=B2}
 N 590 -360 590 -220 {
-lab=#net3}
+lab=B1}
 N 630 -400 630 -220 {
-lab=#net4}
+lab=B0}
 N 220 -360 590 -360 {
-lab=#net3}
+lab=B1}
 N 340 -290 430 -290 {
-lab=#net1}
+lab=SH}
 N 900 20 1180 20 {
-lab=#net5}
+lab=D2}
 N 900 50 1060 50 {
-lab=#net6}
+lab=D1}
 N 900 80 980 80 {
-lab=#net7}
+lab=D0}
 N 900 120 940 120 {
-lab=#net8}
+lab=nEndCnv}
 N 1160 180 1260 180 {
 lab=GND}
 N 1260 -20 1260 180 {
 lab=GND}
 N 900 -80 1260 -80 {
-lab=#net9}
+lab=CompOut}
 N 1160 80 1160 180 {
 lab=GND}
 N 1050 110 1050 180 {
@@ -63,9 +63,9 @@ lab=GND}
 N 230 -300 230 -230 {
 lab=GND}
 N 140 -400 630 -400 {
-lab=#net4}
+lab=B0}
 N 140 -400 140 -390 {
-lab=#net4}
+lab=B0}
 N 970 140 970 180 {
 lab=GND}
 N 480 -260 480 -230 {
@@ -77,11 +77,11 @@ lab=GND}
 N 140 -230 230 -230 {
 lab=GND}
 N 120 -400 140 -400 {
-lab=#net4}
+lab=B0}
 N 930 180 970 180 {
 lab=GND}
 N 480 -320 550 -320 {
-lab=#net2}
+lab=B2}
 C {symbols/vsource.sym} 40 -530 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} 40 -500 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} 40 -560 0 0 {name=l4 lab=VDD}
@@ -113,7 +113,7 @@ value="
 .param vONE=2
 .param vADC=1
 "}
-C {sar3bitsReg.sym} 330 390 0 0 {name=x3}
+C {sar3bitsreg.sym} 330 390 0 0 {name=x3}
 C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 1u 0 1010n 2)"}
 C {symbols/gnd.sym} 30 -700 0 0 {name=l21 lab=GND}
 C {symbols/lab_pin.sym} 100 -790 0 1 {name=x22 sig_type=std_logic lab=reset}
@@ -139,3 +139,12 @@ C {symbols/cap_mim_m3_1.sym} 230 -330 0 0 {name=C7 model=cap_mim_m3_1 W=10 L=10 
 C {symbols/cap_mim_m3_1.sym} 350 -260 0 0 {name=C8 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
 C {symbols/gnd.sym} 230 -230 0 0 {name=l2 lab=GND}
 C {symbols/cap_mim_m3_1.sym} 480 -290 0 0 {name=C9 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
+C {symbols/lab_wire.sym} 1060 -80 0 0 {name=l5 sig_type=std_logic lab=CompOut}
+C {symbols/lab_wire.sym} 1130 20 0 0 {name=l6 sig_type=std_logic lab=D2}
+C {symbols/lab_wire.sym} 1010 50 0 0 {name=l9 sig_type=std_logic lab=D1}
+C {symbols/lab_wire.sym} 960 80 0 0 {name=l10 sig_type=std_logic lab=D0}
+C {symbols/lab_wire.sym} 920 120 0 0 {name=l11 sig_type=std_logic lab=nEndCnv}
+C {symbols/lab_wire.sym} 250 -400 0 0 {name=l12 sig_type=std_logic lab=B0}
+C {symbols/lab_wire.sym} 340 -360 0 0 {name=l13 sig_type=std_logic lab=B1}
+C {symbols/lab_wire.sym} 400 -290 0 0 {name=l14 sig_type=std_logic lab=SH}
+C {symbols/lab_wire.sym} 520 -320 0 0 {name=l15 sig_type=std_logic lab=B2}

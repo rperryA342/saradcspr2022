@@ -29,8 +29,8 @@ N 550 -330 690 -330 { lab=B2}
 N 550 -330 550 -320 { lab=B2}
 N 590 -350 690 -350 { lab=B1}
 N 590 -350 590 -220 { lab=B1}
-N 630 -370 630 -220 { lab=B[0]}
-N 630 -370 690 -370 { lab=B[0]}
+N 630 -370 630 -220 { lab=B0}
+N 630 -370 690 -370 { lab=B0}
 N 430 -410 430 -220 { lab=SH}
 N 430 -410 690 -410 { lab=SH}
 N 660 -310 690 -310 { lab=AGND}
@@ -84,25 +84,26 @@ value="
 ** opencircuitdesign pdks install
 .lib $::SKYWATER_MODELS/sky130.lib.spice tt
 .include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
+*.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
 
 "
 spice_ignore=false}
 C {symbols/code.sym} 570 -590 0 0 {name=codeHeader only_toplevel=true place=header
 value="
 .param vONE=2
+.param vadc=1.5
 "}
-C {sar3bitsReg.sym} 330 390 0 0 {name=x3}
+C {sar3bitsreg.sym} 330 390 0 0 {name=x3}
 C {symbols/lab_wire.sym} 490 -350 0 0 {name=l1 sig_type=std_logic lab=VREF}
 C {symbols/lab_wire.sym} 660 -260 0 1 {name=l2 sig_type=std_logic lab=AGND}
 C {symbols/lab_wire.sym} 50 -290 0 0 {name=l5 sig_type=std_logic lab=Vin}
-C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 1u 0 1010n 2)"}
+C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 500n 0 510n 2)"}
 C {symbols/gnd.sym} 30 -700 0 0 {name=l21 lab=GND}
 C {symbols/lab_pin.sym} 100 -790 0 1 {name=x22 sig_type=std_logic lab=reset}
 C {symbols/vsource.sym} 350 -730 0 0 {name=V1 value="DC 2 pulse(0 2 0 10n 10n 1u 2u)"}
 C {symbols/gnd.sym} 350 -700 0 0 {name=l8 lab=GND}
 C {symbols/lab_pin.sym} 420 -790 0 1 {name=x11 sig_type=std_logic lab=clock}
-C {symbols/vsource.sym} 830 -720 0 0 {name=V3 value="dc 2 pwl (0n 2 3u 2 3010n 0)"}
+C {symbols/vsource.sym} 830 -720 0 0 {name=V3 value="dc 2 pwl (0n 2 1.5u 2 1.51u 0)"}
 C {symbols/gnd.sym} 830 -690 0 0 {name=l25 lab=GND}
 C {symbols/lab_pin.sym} 900 -780 0 1 {name=x26 sig_type=std_logic lab=nStartCnv}
 C {symbols/opin.sym} 900 20 0 0 {name=p1 lab=dataOut[2]}

@@ -1,54 +1,34 @@
-** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/top.sch
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacblock_test.sch
 
 
 .param vONE=2
-.param vadc=1.5
-
-
-**.subckt top dataOut[2] dataOut[1] dataOut[0] nEndCnv
-*.opin dataOut[2]
-*.opin dataOut[1]
-*.opin dataOut[0]
-*.opin nEndCnv
-x1 CompOut SH VREF B0 B1 B2 AGND dacVin dacblock
-x2 dacVin Vin SH ug_sample_hold
-Vmax VDD GND 2
-Vmax1 Vin GND {vadc}
-Vmax3 AGND GND 1
-Vmax4 VREF GND 2
-x3 B0 B1 B2 CompOut SH GND VDD clock dataOut[0] dataOut[1] dataOut[2] nEndCnv nStartCnv reset
-+ sar3bitsreg
-V4 reset GND DC 0 pwl (0n 0 500n 0 510n 2)
-V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
-V3 nStartCnv GND dc 2 pwl (0n 2 1.5u 2 1.51u 0)
-**** begin user architecture code
-
-
-.include ./spice/opamp_sky130.sp
-.include ./spice/sar3bitsreg.sp
-
-.op
-.control
-run
-**plot i(Vswitch)
-
-.endc
+.param AGND=1
+.param rt=5n
+.param pw=250n
+.param t0=100n
+.param t0r=t0+rt
+.param t1=t0r+pw
+.param t1r=t1+rt
+.param t2=t1r+pw
+.param t2r=t2+rt
+.param t3=t2r+pw
+.param t3r=t3+rt
+.param t4=t3r+pw
+.param t4r=t4+rt
+.param t5=t4r+pw
+.param t5r=t5+rt
+.param t6=t5r+pw
+.param t6r=t6+rt
+.param t7=t6r+pw
+.param t7r=t7+rt
+.param b2d=VONE
+.param b1d=0
+.param b0d=VONE
+.param vadc=(b2d/4)+(b1d/8)+(b0d/16)+AGND
 
 
 
-** opencircuitdesign pdks install
-.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
-*.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
-
-
-**** end user architecture code
-**.ends
-
-* expanding   symbol:  dacblock.sym # of pins=8
-** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacblock.sym
-** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacblock.sch
-.subckt dacblock  CompOut SH VREF B0 B1 B2 AGND Vin
+**.subckt dacblock_test Vin AGND VREF SH B0 B1 B2 CompOut
 *.ipin Vin
 *.ipin AGND
 *.ipin VREF
@@ -57,31 +37,52 @@ run
 *.ipin B1
 *.ipin B2
 *.opin CompOut
+Vmax VDD GND 2
 XC1 Vcommon c1v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+Vmax1 Vin GND {vadc}
+Vmax3 AGND GND 1
+V4 SH GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
+XC5 CompOut GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+Vmax4 VREF GND 2
 XC2 Vcommon c2v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+V1 B1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t4} 0 {t4r} 2 {t5} 2 {t5r} {b1d})
 x3 Vcommon AGND CompOut skywater_comparator
+V3 B0 GND dc 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t6} 0 {t6r} 2 {t7} 2 {t7r} {b0d})
+V5 B2 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t2} 0 {t2r} 2 {t3} 2 {t3r} {b2d})
 XC6 Vcommon c4v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=4 m=4
 XC7 Vcommon c3v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=2 m=2
 x1 c4v SH Vin AGND VREF AGND B2 4x1analogmux
 x2 c3v SH Vin AGND VREF AGND B1 4x1analogmux
 x4 c2v SH Vin AGND VREF AGND B0 4x1analogmux
 x5 c1v Vin AGND SH 2x1analogmux
-x6 AGND SH Vcommon analog_switch
-.ends
+x6 AGND SH net1 analog_switch
+Vswitch net1 Vcommon 0
+XC3 AGND GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+**** begin user architecture code
 
 
-* expanding   symbol:  ug_sample_hold.sym # of pins=3
-** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sym
-** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sch
-.subckt ug_sample_hold  Vout Vin SHClk
-*.ipin Vin
-*.ipin SHClk
-*.opin Vout
-x1 Vin SHClk net1 analog_switch
-XC1 net1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
-X1 Vout net1 Vout VDD GND opamp_sky130
-.ends
+.include opamp_sky130.sp
 
+.tran 0.1u 2u
+.control
+run
+**plot i(Vswitch)
+write dacpassgate_testcircuit_v2.raw
+plot v(SH) v(B0)+2 v(B1)+4 v(B2)+6
+plot v(Vin)  v(vCommon)
+**plot v(AGND)
+plot v(c1v) v(c2v)+2 v(c3v)+4 v(c4v)+6
+plot v(CompOut)
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+**** end user architecture code
+**.ends
 
 * expanding   symbol:  skywater_comparator.sym # of pins=3
 ** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/skywater_comparator.sym

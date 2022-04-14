@@ -19,4 +19,4 @@ C {symbols/ipin.sym} 340 -60 1 0 {name=p2 lab=Vin}
 C {symbols/opin.sym} 360 -10 0 0 {name=p3 lab=Vout}
 C {not.sym} -120 -30 0 0 {name=x2 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
-+ VCCPIN=VCC VSSPIN=VSS}
++ VCCPIN=VDD VSSPIN=GND}

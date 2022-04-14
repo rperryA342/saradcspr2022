@@ -1,0 +1,91 @@
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold_test.sch
+**.subckt ug_sample_hold_test
+x1 Avin Vin shclk ug_sample_hold
+V1 Vin GND 1.5
+V2 shclk GND DC 0 pwl (0n 0 1u 0 1.1u 2)
+XC1 Avin GND sky130_fd_pr__cap_mim_m3_1 W=1 L=1 MF=64 m=64
+V3 VDD GND 2
+**** begin user architecture code
+
+
+
+.include ./spice/opamp_sky130.sp
+
+*.op
+.tran 0.1u 5u
+.control
+run
+write up_sample_hold_test.raw
+plot v(vin) v(avin) v(shclk)
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+**.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  ug_sample_hold.sym # of pins=3
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/ug_sample_hold.sch
+.subckt ug_sample_hold  Vout Vin SHClk
+*.ipin Vin
+*.ipin SHClk
+*.opin Vout
+x1 Vin SHClk net1 analog_switch
+XC1 net1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+X1 Vout net1 Vout VDD GND opamp_sky130
+.ends
+
+
+* expanding   symbol:  analog_switch.sym # of pins=3
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/analog_switch.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/analog_switch.sch
+.subckt analog_switch  Vin S Vout
+*.ipin S
+*.ipin Vin
+*.opin Vout
+x1 net1 Vin Vout S dacpassgate
+x2 net1 S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+.ends
+
+
+* expanding   symbol:  dacpassgate.sym # of pins=4
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacpassgate.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/dacpassgate.sch
+.subckt dacpassgate  GP A Z GN
+*.iopin A
+*.iopin Z
+*.ipin GP
+*.ipin GN
+XM1 Z GN A GND sky130_fd_pr__nfet_01v8 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+XM2 Z GP A VDD sky130_fd_pr__pfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+.ends
+
+
+* expanding   symbol:  not.sym # of pins=2
+** sym_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/not.sym
+** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/not.sch
+.subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
+*.opin y
+*.ipin a
+XM1 y a VSSPIN VSSPIN sky130_fd_pr__nfet_01v8 L=L_N W=W_N nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+XM2 y a VCCPIN VCCPIN sky130_fd_pr__pfet_01v8 L=L_P W=W_P nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+.GLOBAL GND
+.GLOBAL VDD
+.end
