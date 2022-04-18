@@ -7,11 +7,10 @@
 
 **.subckt sar3bitsreg_test
 Vmax VDD GND 2
-x3 B0 B1 B2 CompOut SH GND VDD clock D0 D1 D2 nEndCnv nStartCnv reset sar3bitsReg
+x3 B0 B1 B2 CompIn SH GND VDD clock D0 D1 D2 nEndCnv nStartCnv reset sar3bitsreg
 V4 reset GND DC 0 pwl (0n 0 1u 0 1010n 2)
 V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
 V3 nStartCnv GND dc 2 pwl (0n 2 3u 2 3010n 0)
-R1 CompOut GND 1G
 XC2 D2 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC3 D1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC4 D0 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
@@ -20,13 +19,14 @@ XC6 B0 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC7 B1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC8 SH GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC9 B2 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+V2 CompIn GND DC 0 pwl (0n 0 1u 0 1010n 0)
 **** begin user architecture code
 
 
 
 .include ./spice/sar3bitsreg.sp
 
-.tran 0.1u 15u
+.op
 .control
 run
 
