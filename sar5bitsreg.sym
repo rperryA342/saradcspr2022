@@ -1,7 +1,7 @@
 v {xschem version=3.0.0 file_version=1.2 }
 G {}
-K {type=subcircuit
-format="@name @pinlist @symname"
+K {type=primative
+format="@name @@VGND @@VPWR @@reset @@clock @@nStartCnv @@SH @@B4 @@B3 @@B2 @@B1 @@B0 @@CompOut @@D4 @@D3 @@D2 @@D1 @@D0 @@nEndCnv @symname"
 template="name=x1"
 }
 V {}
@@ -33,35 +33,33 @@ L 4 450 -470 570 -470 {}
 L 4 160 -250 160 -140 {}
 B 5 567.5 -472.5 572.5 -467.5 {name=CompOut
 dir=in}
-B 5 567.5 -432.5 572.5 -427.5 {name=dataOut[4]
+B 5 567.5 -432.5 572.5 -427.5 {name=D4
 dir=out}
-B 5 567.5 -272.5 572.5 -267.5 {name=XXX
+B 5 567.5 -272.5 572.5 -267.5 {name=nEndCnv
 dir=inout}
 B 5 157.5 -142.5 162.5 -137.5 {name=VPWR
 dir=inout}
-B 5 137.5 -612.5 142.5 -607.5 {name=B[4]
+B 5 137.5 -612.5 142.5 -607.5 {name=B4
 dir=out}
 B 5 97.5 -612.5 102.5 -607.5 {name=SH
 dir=out}
-B 5 -112.5 -422.5 -107.5 -417.5 {name=nStartCnv
-dir=in}
 B 5 237.5 -142.5 242.5 -137.5 {name=VGND
 dir=inout}
-B 5 567.5 -402.5 572.5 -397.5 {name=dataOut[3]
+B 5 567.5 -402.5 572.5 -397.5 {name=D3
 dir=out}
-B 5 567.5 -372.5 572.5 -367.5 {name=dataOut[2]
+B 5 567.5 -372.5 572.5 -367.5 {name=D2
 dir=out}
-B 5 567.5 -342.5 572.5 -337.5 {name=dataOut[1]
+B 5 567.5 -342.5 572.5 -337.5 {name=D1
 dir=out}
-B 5 567.5 -312.5 572.5 -307.5 {name=dataOut[0]
+B 5 567.5 -312.5 572.5 -307.5 {name=D0
 dir=out}
-B 5 177.5 -612.5 182.5 -607.5 {name=B[3]
+B 5 177.5 -612.5 182.5 -607.5 {name=B3
 dir=out}
-B 5 217.5 -612.5 222.5 -607.5 {name=B[2]
+B 5 217.5 -612.5 222.5 -607.5 {name=B2
 dir=out}
-B 5 257.5 -612.5 262.5 -607.5 {name=B[1]
+B 5 257.5 -612.5 262.5 -607.5 {name=B1
 dir=out}
-B 5 297.5 -612.5 302.5 -607.5 {name=B[0]
+B 5 297.5 -612.5 302.5 -607.5 {name=B0
 dir=out}
 B 5 -112.5 -422.5 -107.5 -417.5 {name=nStartCnv
 dir=in}

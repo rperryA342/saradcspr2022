@@ -150,7 +150,6 @@ C {symbols/lab_pin.sym} 420 -790 0 1 {name=x11 sig_type=std_logic lab=clock}
 C {symbols/vsource.sym} 830 -720 0 0 {name=V3 value="dc 2 pwl (0n 2 3u 2 3010n 0)"}
 C {symbols/gnd.sym} 830 -690 0 0 {name=l25 lab=GND}
 C {symbols/lab_pin.sym} 900 -780 0 1 {name=x26 sig_type=std_logic lab=nStartCnv}
-C {symbols/lab_pin.sym} 220 -30 0 0 {name=x4 sig_type=std_logic lab=nStartCnv}
 C {symbols/lab_pin.sym} 220 20 0 0 {name=x5 sig_type=std_logic lab=clock}
 C {symbols/lab_pin.sym} 220 60 0 0 {name=x6 sig_type=std_logic lab=reset}
 C {symbols/gnd.sym} 570 250 0 0 {name=l7 lab=GND}
@@ -186,3 +185,4 @@ C {symbols/cap_mim_m3_1.sym} 1340 150 0 0 {name=C11 model=cap_mim_m3_1 W=10 L=10
 C {symbols/cap_mim_m3_1.sym} 1240 150 0 0 {name=C12 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
 C {symbols/lab_wire.sym} 1270 -10 0 1 {name=l19 sig_type=std_logic lab=D3}
 C {symbols/lab_wire.sym} 1360 -40 0 1 {name=l20 sig_type=std_logic lab=D4}
+C {symbols/lab_pin.sym} 220 -30 0 0 {name=x3 sig_type=std_logic lab=nStartCnv}
