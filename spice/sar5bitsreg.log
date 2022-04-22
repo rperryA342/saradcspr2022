@@ -1,3 +1,0 @@
-Circuit: * SPICE3 file created from sar5bitsreg.ext - technology: sky130A
-
-Fatal Error: .option syntax error, unrecognized option: "scale"
