@@ -55,7 +55,7 @@ C {ug_sample_hold.sym} 250 -280 0 0 {name=x2}
 C {symbols/vsource.sym} 40 -530 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} 40 -500 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} 40 -560 0 0 {name=l4 lab=VDD}
-C {symbols/vsource.sym} 140 -530 0 0 {name=Vmax1 value=\{vadc\}}
+C {symbols/vsource.sym} 140 -530 0 0 {name=Vmax1 value="sin(1.5 0.5 10000 2u )"}
 C {symbols/gnd.sym} 140 -500 0 0 {name=l14 lab=GND}
 C {symbols/vsource.sym} 330 -530 0 0 {name=Vmax3 value=1}
 C {symbols/gnd.sym} 330 -500 0 0 {name=l18 lab=GND}
