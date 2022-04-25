@@ -1,8 +1,8 @@
 * NGSPICE file created from sar3bitsreg.ext - technology: sky130A
 
 
-.subckt sar3bitsreg VGND VPWR reset clock nStartCnv SH B[2] B[1] B[0] CompOut dataOut[2] dataOut[1]
-+ dataOut[0] nEndCnv  
+.subckt sar3bitsreg VGND VPWR  B[0] B[1] B[2] CompOut SH clock dataOut[0] dataOut[1]
++ dataOut[2] nEndCnv nStartCnv reset 
 XFILLER_13_100 VGND VGND VPWR VPWR sky130_fd_sc_hd__fill_2
 XFILLER_12_98 VGND VGND VPWR VPWR sky130_fd_sc_hd__decap_4
 XFILLER_12_65 VGND VGND VPWR VPWR sky130_fd_sc_hd__decap_4

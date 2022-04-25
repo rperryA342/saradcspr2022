@@ -38,14 +38,6 @@ N 220 -360 590 -360 {
 lab=B1}
 N 340 -290 430 -290 {
 lab=SH}
-N 900 20 1180 20 {
-lab=D2}
-N 900 50 1060 50 {
-lab=D1}
-N 900 80 980 80 {
-lab=D0}
-N 900 120 940 120 {
-lab=nEndCnv}
 N 1160 80 1160 180 {
 lab=GND}
 N 1050 110 1050 180 {
@@ -80,6 +72,11 @@ N 900 -80 970 -80 {
 lab=CompIn}
 N 260 -600 260 -570 { lab=CompIn}
 N 260 -600 330 -600 { lab=CompIn}
+N 900 120 930 120 {}
+N 900 80 970 80 {}
+N 900 50 1050 50 {}
+N 900 20 1130 20 {}
+N 1130 20 1160 20 {}
 C {symbols/vsource.sym} 40 -530 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} 40 -500 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} 40 -560 0 0 {name=l4 lab=VDD}
@@ -102,6 +99,8 @@ value="
 ** opencircuitdesign pdks install
 .lib $::SKYWATER_MODELS/sky130.lib.spice tt
 .include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice
+
 **.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
 
 "
@@ -111,7 +110,6 @@ value="
 .param vONE=2
 .param vADC=1
 "}
-C {sar3bitsreg.sym} 330 390 0 0 {name=x3}
 C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 1u 0 1010n 2)"}
 C {symbols/gnd.sym} 30 -700 0 0 {name=l21 lab=GND}
 C {symbols/lab_pin.sym} 100 -790 0 1 {name=x22 sig_type=std_logic lab=reset}
@@ -148,3 +146,4 @@ C {symbols/lab_pin.sym} 970 -80 0 1 {name=l5 sig_type=std_logic lab=CompIn}
 C {symbols/vsource.sym} 260 -540 0 0 {name=V2 value="DC 0 pwl (0n 0 1u 0 1010n 0)"}
 C {symbols/gnd.sym} 260 -510 0 0 {name=l16 lab=GND}
 C {symbols/lab_pin.sym} 330 -600 0 1 {name=x1 sig_type=std_logic lab=CompIn}
+C {sar3bitsreg.sym} 330 390 0 0 {name=x2}

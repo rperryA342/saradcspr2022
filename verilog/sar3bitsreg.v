@@ -6,6 +6,7 @@ module sar3bitsreg(
   output reg SH,
   output reg [2:0] B,
   output reg [2:0] dataOut,
+  output reg [3:0] stateOut,
   output reg nEndCnv);
   
   reg [3:0] state;  // You'll need to count your states
@@ -31,6 +32,8 @@ module sar3bitsreg(
   
   // Add additional states
   
+// assign stateOut = state[3];
+  
   // Combine states and register block
   always @(posedge clock or negedge reset)
      begin
@@ -41,6 +44,7 @@ module sar3bitsreg(
            dataOut = 3'd7;
            SH = 1'b0;
            B = 3'd0;
+           stateOut = 4'd0;
          end 
        else 
          begin
@@ -52,6 +56,7 @@ module sar3bitsreg(
 		   end	
            sWaitForStart:
 		     begin
+		           stateOut = 4'd15;
 			    B=3'b000;
 				if(nStartCnv == 0) state = sSample;
 			 end
@@ -116,6 +121,7 @@ module sar3bitsreg(
              state = sWaitForStart;
             end 
          endcase
+         stateOut = state;
        	end
 	end
  endmodule 
