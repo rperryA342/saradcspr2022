@@ -1,0 +1,23 @@
+magic
+tech sky130A
+timestamp 1651320701
+<< metal3 >>
+rect 2145 3065 2155 3075
+rect 10 -215 110 350
+rect 4190 -215 4290 350
+<< metal4 >>
+rect 470 -280 570 0
+rect 3725 -280 3825 200
+rect 525 -2990 535 -2980
+use mimcap8C  mimcap8C_1
+timestamp 1651320701
+transform 1 0 10 0 1 -2890
+box 0 -100 4290 2975
+use mimcap8C  mimcap8C_0
+timestamp 1651320701
+transform 1 0 0 0 1 100
+box 0 -100 4290 2975
+<< labels >>
+rlabel metal3 2150 3075 2150 3075 1 common
+rlabel metal4 530 -2990 530 -2990 5 top16C
+<< end >>
