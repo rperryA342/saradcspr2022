@@ -2,6 +2,7 @@
 
 .option scale=10000u
 
+.subckt caparray vcommon B0 B1 B2 B3 B4 
 X0 B0 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X1 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X2 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
@@ -33,12 +34,5 @@ X27 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X28 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X29 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X30 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-C0 vcommon B0 9.48fF
-C1 vcommon B3 76.33fF
-C2 B1 vcommon 18.96fF
-C3 vcommon B2 38.16fF
-C4 vcommon B4 152.90fF
-C5 vcommon SUB 101.49fF **FLOATING
-C6 B4 SUB 12.51fF **FLOATING
-C7 B3 SUB 6.03fF **FLOATING
-C8 B2 SUB 2.69fF **FLOATING
+
+.ends
