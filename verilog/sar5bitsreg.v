@@ -13,7 +13,7 @@ module sar5bitsreg(
   // State Encoding -- define your states here
   localparam [4:0]     // Should match above
   // Give states usable names
-  sReset = 5'd0,
+  sReset = 5'b11010,
   sWaitForStart = 5'd1,
   sSample = 5'd2,
   sHold = 5'd3,
@@ -53,11 +53,13 @@ module sar5bitsreg(
          begin
          case(state)
            sReset:
+           begin
              state = sWaitForStart;
+           end
            sWaitForStart:
-		     begin
-				if(nStartCnv == 0) state = sSample;
-			 end
+		begin
+		 if(nStartCnv == 0) state = sSample;
+		end
            sSample: 
              begin
                SH = 1'b1;
@@ -82,7 +84,9 @@ module sar5bitsreg(
                state = sB3High;
              end
            sB4Wait:
+            begin
              state = sB4Check;			 
+            end 
           sB3High:
              begin
                B[3] = 1'b1;
@@ -94,19 +98,23 @@ module sar5bitsreg(
                state = sB2High;
              end
            sB3Wait:
-             state = sB3Check;				 		 
+            begin
+             state = sB3Check;				 		     
+            end 
            sB2High:
              begin
                B[2] = 1'b1;
-               state = sB2Wait;
+               state = sB2Wait;  
              end
            sB2Check:
              begin 
                if(CompOut) B[2] = 1'b0;
-               state = sB1High;
+               state = sB1High;   
              end
            sB2Wait:
-             state = sB2Check;
+            begin
+             state = sB2Check; 
+            end 
            sB1High:
              begin
                B[1] = 1'b1;
@@ -118,11 +126,13 @@ module sar5bitsreg(
                state = sB0High;
              end
            sB1Wait:
+            begin
              state = sB1Check;
+            end 
            sB0High:
              begin
                B[0] = 1'b1;
-               state = sB0Wait;
+               state = sB0Wait;  
              end
            sB0Check:
              begin 
@@ -130,9 +140,13 @@ module sar5bitsreg(
                state = sStoreWait;
              end
            sB0Wait:
-             state = sB0Check;
+             begin
+              state = sB0Check;
+             end 
            sStoreWait:
-             state = sStore;
+             begin
+               state = sStore;
+             end  
           sStore:
             begin
              dataOut = B;
@@ -144,8 +158,8 @@ module sar5bitsreg(
              state = sWaitForStart;
             end 
          endcase
-//		 dataOut = state; 
-       	end
+      	end
+//      	dataOut = state;
 	end
  endmodule 
   

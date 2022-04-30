@@ -1,0 +1,138 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1651353616
+<< obsli1 >>
+rect 1104 2159 13616 14705
+<< obsm1 >>
+rect 14 2128 14246 14736
+<< metal2 >>
+rect 2594 16088 2650 16888
+rect 6458 16088 6514 16888
+rect 10322 16088 10378 16888
+rect 14186 16088 14242 16888
+rect 18 0 74 800
+rect 3882 0 3938 800
+rect 7746 0 7802 800
+rect 11610 0 11666 800
+<< obsm2 >>
+rect 20 16032 2538 16088
+rect 2706 16032 6402 16088
+rect 6570 16032 10266 16088
+rect 10434 16032 14130 16088
+rect 20 856 14240 16032
+rect 130 711 3826 856
+rect 3994 711 7690 856
+rect 7858 711 11554 856
+rect 11722 711 14240 856
+<< metal3 >>
+rect 0 15648 800 15768
+rect 13944 12928 14744 13048
+rect 0 11568 800 11688
+rect 13944 8848 14744 8968
+rect 0 7488 800 7608
+rect 13944 4768 14744 4888
+rect 0 3408 800 3528
+rect 13944 688 14744 808
+<< obsm3 >>
+rect 880 15568 13944 15741
+rect 800 13128 13944 15568
+rect 800 12848 13864 13128
+rect 800 11768 13944 12848
+rect 880 11488 13944 11768
+rect 800 9048 13944 11488
+rect 800 8768 13864 9048
+rect 800 7688 13944 8768
+rect 880 7408 13944 7688
+rect 800 4968 13944 7408
+rect 800 4688 13864 4968
+rect 800 3608 13944 4688
+rect 880 3328 13944 3608
+rect 800 888 13944 3328
+rect 800 715 13864 888
+<< metal4 >>
+rect 2508 2128 2828 14736
+rect 4072 2128 4392 14736
+rect 5636 2128 5956 14736
+rect 7200 2128 7520 14736
+rect 8764 2128 9084 14736
+rect 10328 2128 10648 14736
+rect 11892 2128 12212 14736
+<< metal5 >>
+rect 1104 12916 13616 13236
+rect 1104 11352 13616 11672
+rect 1104 9788 13616 10108
+rect 1104 8224 13616 8544
+rect 1104 6660 13616 6980
+rect 1104 5096 13616 5416
+rect 1104 3532 13616 3852
+<< labels >>
+rlabel metal3 s 13944 8848 14744 8968 6 B[0]
+port 1 nsew signal output
+rlabel metal3 s 0 15648 800 15768 6 B[1]
+port 2 nsew signal output
+rlabel metal3 s 13944 12928 14744 13048 6 B[2]
+port 3 nsew signal output
+rlabel metal3 s 13944 688 14744 808 6 B[3]
+port 4 nsew signal output
+rlabel metal2 s 6458 16088 6514 16888 6 B[4]
+port 5 nsew signal output
+rlabel metal2 s 18 0 74 800 6 CompOut
+port 6 nsew signal input
+rlabel metal2 s 11610 0 11666 800 6 SH
+port 7 nsew signal output
+rlabel metal5 s 1104 5096 13616 5416 6 VGND
+port 8 nsew ground input
+rlabel metal5 s 1104 8224 13616 8544 6 VGND
+port 8 nsew ground input
+rlabel metal5 s 1104 11352 13616 11672 6 VGND
+port 8 nsew ground input
+rlabel metal4 s 4072 2128 4392 14736 6 VGND
+port 8 nsew ground input
+rlabel metal4 s 7200 2128 7520 14736 6 VGND
+port 8 nsew ground input
+rlabel metal4 s 10328 2128 10648 14736 6 VGND
+port 8 nsew ground input
+rlabel metal5 s 1104 3532 13616 3852 6 VPWR
+port 9 nsew power input
+rlabel metal5 s 1104 6660 13616 6980 6 VPWR
+port 9 nsew power input
+rlabel metal5 s 1104 9788 13616 10108 6 VPWR
+port 9 nsew power input
+rlabel metal5 s 1104 12916 13616 13236 6 VPWR
+port 9 nsew power input
+rlabel metal4 s 2508 2128 2828 14736 6 VPWR
+port 9 nsew power input
+rlabel metal4 s 5636 2128 5956 14736 6 VPWR
+port 9 nsew power input
+rlabel metal4 s 8764 2128 9084 14736 6 VPWR
+port 9 nsew power input
+rlabel metal4 s 11892 2128 12212 14736 6 VPWR
+port 9 nsew power input
+rlabel metal2 s 3882 0 3938 800 6 clock
+port 10 nsew signal input
+rlabel metal2 s 10322 16088 10378 16888 6 dataOut[0]
+port 11 nsew signal output
+rlabel metal3 s 0 3408 800 3528 6 dataOut[1]
+port 12 nsew signal output
+rlabel metal3 s 0 7488 800 7608 6 dataOut[2]
+port 13 nsew signal output
+rlabel metal2 s 14186 16088 14242 16888 6 dataOut[3]
+port 14 nsew signal output
+rlabel metal2 s 7746 0 7802 800 6 dataOut[4]
+port 15 nsew signal output
+rlabel metal3 s 0 11568 800 11688 6 nEndCnv
+port 16 nsew signal output
+rlabel metal2 s 2594 16088 2650 16888 6 nStartCnv
+port 17 nsew signal input
+rlabel metal3 s 13944 4768 14744 4888 6 reset
+port 18 nsew signal input
+<< properties >>
+string FIXED_BBOX 0 0 14744 16888
+string LEFclass BLOCK
+string LEFview TRUE
+string GDS_END 422104
+string GDS_FILE /openlane/designs/sar5bitsreg/runs/current/results/signoff/sar5bitsreg.magic.gds
+string GDS_START 107390
+<< end >>
+
