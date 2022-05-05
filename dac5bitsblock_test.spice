@@ -1,35 +1,65 @@
-** sch_path: /home/reg/sardesign/saradcspr2022/top5bits.sch
+** sch_path: /home/reg/sardesign/saradcspr2022/dac5bitsblock_test.sch
 
 
 .param vONE=2
-.param vadc=1.5
+.param AGND=1
+.param rt=5n
+.param pw=250n
+.param t0=100n
+.param t0r=t0+rt
+.param t1=t0r+pw
+.param t1r=t1+rt
+.param t2=t1r+pw
+.param t2r=t2+rt
+.param t3=t2r+pw
+.param t3r=t3+rt
+.param t4=t3r+pw
+.param t4r=t4+rt
+.param t5=t4r+pw
+.param t5r=t5+rt
+.param t6=t5r+pw
+.param t6r=t6+rt
+.param t7=t6r+pw
+.param t7r=t7+rt
+.param t8=t7r+pw
+.param t8r=t8+rt
+.param t9=t8r+pw
+.param t9r=t9+rt
+.param t10=t9r+pw
+.param t10r=t10+rt
+.param t11=t10r+pw
+.param t11r=t11+rt
+
+.param b4d=VONE
+.param b3d=0
+.param b2d=VONE
+.param b1d=0
+.param b0d=VONE
+.param vadc=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)+AGND
 
 
-**.subckt top5bits D2 D1 D0 nEndCnv D4 D3
-*.opin D2
-*.opin D1
-*.opin D0
-*.opin nEndCnv
-*.opin D4
-*.opin D3
-x2 dacvin Vin SH ug_sample_hold
+
+**.subckt dac5bitsblock_test
 Vmax VDD GND 2
-Vmax1 Vin GND sin(1.5 0.5 10000 2u )
+Vmax1 Vin GND {vadc}
 Vmax3 AGND GND 1
+V4 SH GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
 Vmax4 VREF GND 2
-V4 reset GND DC 0 pwl (0n 0 500n 0 510n 2)
-V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
-V3 nStartCnv GND dc 2 pwl (0n 2 1.5u 2 1.51u 0)
-x1 CompOut SH VREF B4 B3 B2 B1 B0 AGND dacvin dacblock5bits
-X1 GND VDD reset clock nStartCnv SH B4 B3 B2 B1 B0 CompOut D4 D3 D2 D1 D0 nEndCnv sar5bitsreg
+V1 B3 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t4} 0 {t4r} 2 {t5} 2 {t5r} {b3d})
+V3 B2 GND dc 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t6} 0 {t6r} 2 {t7} 2 {t7r} {b2d})
+V5 B4 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t2} 0 {t2r} 2 {t3} 2 {t3r} {b4d})
+XC3 AGND GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+x1 CompOut SH VREF B4 B3 B2 B1 B0 AGND Vin dacblock5bits
+V2 B1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t8} 0 {t8r} 2 {t9} 2 {t9r} {b1d})
+V6 B0 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t10} 0 {t10r} 2 {t11} 2 {t11r} {b0d})
+C1 CompOut GND 1p m=1
 **** begin user architecture code
 
 
-.include ./spice/opamp_sky130.sp
-.include ./spice/sar5bitsreg.sp
-.include ./spice/caparray.sp
+.include opamp_sky130.sp
+.include spice/caparray.sp
 
-.op
+.tran 0.1u 2u
 .control
 run
 **plot i(Vswitch)
@@ -40,24 +70,10 @@ run
 
 ** opencircuitdesign pdks install
 .lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice
-
 
 
 **** end user architecture code
 **.ends
-
-* expanding   symbol:  ug_sample_hold.sym # of pins=3
-** sym_path: /home/reg/sardesign/saradcspr2022/ug_sample_hold.sym
-** sch_path: /home/reg/sardesign/saradcspr2022/ug_sample_hold.sch
-.subckt ug_sample_hold  Vout Vin SHClk
-*.ipin Vin
-*.ipin SHClk
-*.opin Vout
-x1 Vin SHClk Vout analog_switch
-.ends
-
 
 * expanding   symbol:  dacblock5bits.sym # of pins=10
 ** sym_path: /home/reg/sardesign/saradcspr2022/dacblock5bits.sym
@@ -73,7 +89,6 @@ x1 Vin SHClk Vout analog_switch
 *.opin CompOut
 *.iopin AGND
 *.iopin VREF
-x3 vcommon AGND CompOut skywater_comparator
 x1 C16 SH Vin AGND VREF AGND B4 4x1analogmux
 x2 C8 SH Vin AGND VREF AGND B3 4x1analogmux
 x4 C4 SH Vin AGND VREF AGND B2 4x1analogmux
@@ -81,31 +96,8 @@ x5 C0 Vin AGND SH 2x1analogmux
 x6 AGND SH vcommon analog_switch
 x7 C2 SH Vin AGND VREF AGND B1 4x1analogmux
 x8 C1 SH Vin AGND VREF AGND B0 4x1analogmux
-x1 vcommon C0 C1 C2 C4 C8 C16 caparray
-.ends
-
-
-* expanding   symbol:  analog_switch.sym # of pins=3
-** sym_path: /home/reg/sardesign/saradcspr2022/analog_switch.sym
-** sch_path: /home/reg/sardesign/saradcspr2022/analog_switch.sch
-.subckt analog_switch  Vin S Vout
-*.ipin S
-*.ipin Vin
-*.opin Vout
-x1 net1 Vin Vout S dacpassgate
-x2 net1 S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
-.ends
-
-
-* expanding   symbol:  skywater_comparator.sym # of pins=3
-** sym_path: /home/reg/sardesign/saradcspr2022/skywater_comparator.sym
-** sch_path: /home/reg/sardesign/saradcspr2022/skywater_comparator.sch
-.subckt skywater_comparator  Vmin Vpos Y
-*.ipin Vpos
-*.ipin Vmin
-*.opin Y
-x1 Y net1 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
-x2 Vmin Vpos net1 VDD GND opamp_sky130
+x9 vcommon C0 C1 C2 C4 C8 C16 caparray
+R1 CompOut vcommon 1k m=1
 .ends
 
 
@@ -120,9 +112,9 @@ x2 Vmin Vpos net1 VDD GND opamp_sky130
 *.ipin S1
 *.ipin S0
 *.opin Vout
-x2 net2 A1 A0 S0 2x1analogmux
-x3 Vout net1 net2 S1 2x1analogmux
-x1 net1 A3 A2 S0 2x1analogmux
+x2 nS1S0 A1 A0 S0 2x1analogmux
+x3 Vout S1S0 nS1S0 S1 2x1analogmux
+x1 S1S0 A3 A2 S0 2x1analogmux
 .ends
 
 
@@ -134,9 +126,21 @@ x1 net1 A3 A2 S0 2x1analogmux
 *.opin Vout
 *.ipin A1
 *.ipin A0
-x1 net1 A1 Vout S dacpassgate
-x2 S A0 Vout net1 dacpassgate
-x3 net1 S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+x1 nS A1 Vout S dacpassgate
+x2 S A0 Vout nS dacpassgate
+x3 nS S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+.ends
+
+
+* expanding   symbol:  analog_switch.sym # of pins=3
+** sym_path: /home/reg/sardesign/saradcspr2022/analog_switch.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/analog_switch.sch
+.subckt analog_switch  Vin S Vout
+*.ipin S
+*.ipin Vin
+*.opin Vout
+x1 nS Vin Vout S dacpassgate
+x2 nS S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 .ends
 
 

@@ -4,10 +4,10 @@ K {}
 V {}
 S {}
 E {}
-N -0 -280 0 -160 { lab=#net1}
-N 0 -280 270 -280 { lab=#net1}
-N 130 -260 270 -260 { lab=#net2}
-N 130 -260 130 -160 { lab=#net2}
+N -0 -280 0 -160 { lab=S1S0}
+N 0 -280 270 -280 { lab=S1S0}
+N 130 -260 270 -260 { lab=xxx}
+N 130 -260 130 -160 { lab=xxx}
 N 570 -280 610 -280 { lab=Vout}
 N -0 140 -0 160 { lab=A3}
 N -30 160 -0 160 { lab=A3}
@@ -38,3 +38,5 @@ C {2x1analogmux.sym} 150 -10 3 0 {name=x2}
 C {2x1analogmux.sym} 420 -260 0 0 {name=x3}
 C {2x1analogmux.sym} 20 -10 3 0 {name=x1}
 C {symbols/opin.sym} 610 -280 0 0 {name=p7 lab=Vout}
+C {symbols/lab_wire.sym} 0 -280 0 0 {name=l1 sig_type=std_logic lab=S1S0}
+C {symbols/lab_wire.sym} 130 -260 0 0 {name=l2 sig_type=std_logic lab=nS1S0}

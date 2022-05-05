@@ -4,7 +4,7 @@ K {}
 V {}
 S {}
 E {}
-N -80 -30 -10 -30 { lab=#net1}
+N -80 -30 -10 -30 { lab=xxx}
 N -210 -30 -160 -30 { lab=S}
 N -190 -30 -190 30 { lab=S}
 N -190 30 -70 30 { lab=S}
@@ -20,3 +20,4 @@ C {symbols/opin.sym} 360 -10 0 0 {name=p3 lab=Vout}
 C {not.sym} -120 -30 0 0 {name=x2 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
 + VCCPIN=VDD VSSPIN=GND}
+C {symbols/lab_wire.sym} -30 -30 0 0 {name=l1 sig_type=std_logic lab=nS}

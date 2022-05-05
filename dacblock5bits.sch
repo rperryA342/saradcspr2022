@@ -20,7 +20,6 @@ K {}
 V {}
 S {}
 E {}
-N 420 -150 420 -80 { lab=AGND}
 N -650 610 -650 760 { lab=Vin}
 N -720 670 -720 780 { lab=AGND}
 N -530 590 -530 800 { lab=SH}
@@ -45,7 +44,7 @@ N -800 130 -430 130 { lab=VREF}
 N -800 300 -430 300 { lab=VREF}
 N -720 320 -430 320 { lab=AGND}
 N -800 130 -800 300 { lab=VREF}
-N -120 890 70 890 { lab=C16}
+N -120 890 70 890 { lab=vcommon}
 N -980 -150 -980 -10 { lab=B4}
 N -720 780 -430 780 {
 lab=AGND}
@@ -130,12 +129,21 @@ lab=VREF}
 N -130 760 290 760 {
 lab=C0}
 N -130 240 230 240 { lab=C4}
-N 320 -190 420 -190 { lab=C16}
-N 70 890 370 890 { lab=C16}
-N 370 -190 370 890 { lab=C16}
-N 520 -170 560 -170 { lab=CompOut}
-C {symbols/lab_wire.sym} 420 -80 0 0 {name=l6 sig_type=std_logic lab=AGND}
-C {skywater_comparator.sym} 400 -220 2 1 {name=x3}
+N 70 890 370 890 { lab=vcommon}
+N 640 -190 680 -190 { lab=CompOut}
+N 420 -80 420 880 {
+lab=vcommon}
+N 370 890 420 890 {
+lab=vcommon}
+N 420 880 420 890 {
+lab=vcommon}
+N 320 -190 480 -190 {
+lab=vcommon}
+N 560 -190 640 -190 {
+lab=CompOut}
+N 420 -190 420 -80 {
+lab=vcommon}
+N 480 -190 500 -190 {}
 C {4x1analogmux.sym} -280 -60 0 0 {name=x1}
 C {4x1analogmux.sym} -280 120 0 0 {name=x2}
 C {4x1analogmux.sym} -280 290 0 0 {name=x4}
@@ -143,7 +151,6 @@ C {2x1analogmux.sym} -280 780 0 0 {name=x5}
 C {analog_switch.sym} -270 900 0 0 {name=x6}
 C {4x1analogmux.sym} -280 460 0 0 {name=x7}
 C {4x1analogmux.sym} -280 640 0 0 {name=x8}
-C {caparray.sym} 170 -160 0 0 {}
 C {symbols/ipin.sym} -1220 -150 1 0 {name=p1 lab=B0
 }
 C {symbols/ipin.sym} -1160 -150 1 0 {name=p2 lab=B1
@@ -156,7 +163,7 @@ C {symbols/ipin.sym} -980 -150 1 0 {name=p5 lab=B4
 }
 C {symbols/ipin.sym} -650 -150 1 0 {name=p8 lab=Vin}
 C {symbols/ipin.sym} -530 -160 1 0 {name=p9 lab=SH}
-C {symbols/opin.sym} 560 -170 0 0 {name=p10 lab=CompOut}
+C {symbols/opin.sym} 680 -190 0 0 {name=p10 lab=CompOut}
 C {symbols/iopin.sym} -720 -150 3 0 {name=p7 lab=AGND}
 C {symbols/iopin.sym} -800 -150 3 0 {name=p6 lab=VREF}
 C {symbols/lab_wire.sym} 20 -110 0 0 {name=l1 sig_type=std_logic lab=C16}
@@ -166,3 +173,9 @@ C {symbols/lab_wire.sym} 10 410 0 0 {name=l4 sig_type=std_logic lab=C2}
 C {symbols/lab_wire.sym} 10 590 0 0 {name=l5 sig_type=std_logic lab=C1}
 C {symbols/lab_wire.sym} 0 760 0 0 {name=l7 sig_type=std_logic lab=C0}
 C {symbols/lab_wire.sym} 0 890 0 0 {name=l8 sig_type=std_logic lab=vcommon}
+C {caparray.sym} 170 -160 0 0 {name=x9}
+C {symbols/res.sym} 530 -190 1 0 {name=R1
+value=1k
+footprint=1206
+device=resistor
+m=1}

@@ -23,8 +23,8 @@ E {}
 N 210 -180 210 -120 { lab=Vout}
 N 310 -180 310 -120 { lab=Vout}
 N 310 -220 310 -180 { lab=Vout}
-N 120 210 190 210 { lab=#net1}
-N 190 180 190 210 { lab=#net1}
+N 120 210 190 210 { lab=xxx}
+N 190 180 190 210 { lab=xxx}
 N -40 210 40 210 { lab=S}
 N 210 180 210 260 { lab=S}
 N -10 260 210 260 { lab=S}
@@ -35,9 +35,9 @@ N 160 -140 190 -140 { lab=A1}
 N 290 -140 290 -120 { lab=A0}
 N 270 -140 290 -140 { lab=A0}
 N 210 -180 310 -180 { lab=Vout}
-N 190 210 300 210 { lab=#net1}
-N 310 180 310 210 { lab=#net1}
-N 300 210 310 210 { lab=#net1}
+N 190 210 300 210 { lab=xxx}
+N 310 180 310 210 { lab=xxx}
+N 300 210 310 210 { lab=xxx}
 N 210 260 290 260 { lab=S}
 N 290 180 290 260 { lab=S}
 C {dacpassgate.sym} 200 30 3 0 {name=x1}
@@ -49,3 +49,4 @@ C {symbols/ipin.sym} 270 -140 0 0 {name=p6 lab=A0}
 C {not.sym} 80 210 0 0 {name=x3 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
 + VCCPIN=VDD VSSPIN=GND}
+C {symbols/lab_wire.sym} 260 210 0 0 {name=l1 sig_type=std_logic lab=nS}

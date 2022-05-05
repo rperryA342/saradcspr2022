@@ -1,4 +1,4 @@
-** sch_path: /home/reg/sardesign/saradcspr2022/dacblock_test.sch
+** sch_path: /home/reg/sardesign/saradcspr2022/dac3bitsblock_test.sch
 
 
 .param vONE=2
@@ -28,7 +28,7 @@
 
 
 
-**.subckt dacblock_test Vin AGND VREF SH B0 B1 B2 CompOut
+**.subckt dac3bitsblock_test Vin AGND VREF SH B0 B1 B2 CompOut
 *.ipin Vin
 *.ipin AGND
 *.ipin VREF
@@ -38,30 +38,27 @@
 *.ipin B2
 *.opin CompOut
 Vmax VDD GND 2
-XC1 Vcommon c1v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 Vmax1 Vin GND {vadc}
 Vmax3 AGND GND 1
 V4 SH GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
 XC5 CompOut GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 Vmax4 VREF GND 2
-XC2 Vcommon c2v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 V1 B1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t4} 0 {t4r} 2 {t5} 2 {t5r} {b1d})
 x3 Vcommon AGND CompOut skywater_comparator
 V3 B0 GND dc 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t6} 0 {t6r} 2 {t7} 2 {t7r} {b0d})
 V5 B2 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t2} 0 {t2r} 2 {t3} 2 {t3r} {b2d})
-XC6 Vcommon c4v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=4 m=4
-XC7 Vcommon c3v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=2 m=2
 x1 c4v SH Vin AGND VREF AGND B2 4x1analogmux
 x2 c3v SH Vin AGND VREF AGND B1 4x1analogmux
 x4 c2v SH Vin AGND VREF AGND B0 4x1analogmux
 x5 c1v Vin AGND SH 2x1analogmux
-x6 AGND SH net1 analog_switch
-Vswitch net1 Vcommon 0
+x6 AGND SH Vcommon analog_switch
 XC3 AGND GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
+x7 Vcommon c1v c2v c3v c4v GND GND caparray
 **** begin user architecture code
 
 
-.include opamp_sky130.sp
+.include spice/opamp_sky130.sp
+.include spice/caparray.sp
 
 .tran 0.1u 2u
 .control
@@ -85,8 +82,8 @@ run
 *.ipin Vpos
 *.ipin Vmin
 *.opin Y
-x1 Y net1 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
-x2 Vmin Vpos net1 VDD GND opamp_sky130
+x1 Y A VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
+x2 Vmin Vpos A VDD GND opamp_sky130
 .ends
 
 

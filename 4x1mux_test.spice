@@ -1,0 +1,138 @@
+** sch_path: /home/reg/sardesign/saradcspr2022/4x1mux_test.sch
+
+
+.param vONE=2
+.param AGND=1
+.param rt=5n
+.param pw=250n
+.param t0=100n
+.param t0r=t0+rt
+.param t1=t0r+pw
+.param t1r=t1+rt
+.param t2=t1r+pw
+.param t2r=t2+rt
+.param t3=t2r+pw
+.param t3r=t3+rt
+.param t4=t3r+pw
+.param t4r=t4+rt
+.param t5=t4r+pw
+.param t5r=t5+rt
+.param t6=t5r+pw
+.param t6r=t6+rt
+.param t7=t6r+pw
+.param t7r=t7+rt
+.param t8=t7r+pw
+.param t8r=t8+rt
+.param t9=t8r+pw
+.param t9r=t9+rt
+.param t10=t9r+pw
+.param t10r=t10+rt
+.param t11=t10r+pw
+.param t11r=t11+rt
+
+.param b4d=VONE
+.param b3d=0
+.param b2d=VONE
+.param b1d=0
+.param b0d=VONE
+.param vadc=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)+AGND
+
+
+
+**.subckt 4x1mux_test
+Vmax VDD GND 2
+V4 S0 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
+V3 B2 GND dc 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t6} 0 {t6r} 2 {t7} 2 {t7r} {b2d})
+V5 B3 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t2} 0 {t2r} 2 {t3} 2 {t3r} {b4d})
+V2 B1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t8} 0 {t8r} 2 {t9} 2 {t9r} {b1d})
+V6 B0 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t10} 0 {t10r} 2 {t11} 2 {t11r} {b0d})
+C1 CompOut GND 1p m=1
+x1 CompOut S1 B3 B2 B1 B0 S0 4x1analogmux
+V1 S1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
+**** begin user architecture code
+
+
+.include opamp_sky130.sp
+.include spice/caparray.sp
+
+.tran 0.1u 2u
+.control
+run
+**plot i(Vswitch)
+
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  4x1analogmux.sym # of pins=7
+** sym_path: /home/reg/sardesign/saradcspr2022/4x1analogmux.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/4x1analogmux.sch
+.subckt 4x1analogmux  Vout S1 A3 A2 A1 A0 S0
+*.ipin A3
+*.ipin A2
+*.ipin A1
+*.ipin A0
+*.ipin S1
+*.ipin S0
+*.opin Vout
+x2 nS1S0 A1 A0 S0 2x1analogmux
+x3 Vout S1S0 nS1S0 S1 2x1analogmux
+x1 S1S0 A3 A2 S0 2x1analogmux
+.ends
+
+
+* expanding   symbol:  2x1analogmux.sym # of pins=4
+** sym_path: /home/reg/sardesign/saradcspr2022/2x1analogmux.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/2x1analogmux.sch
+.subckt 2x1analogmux  Vout A1 A0 S
+*.ipin S
+*.opin Vout
+*.ipin A1
+*.ipin A0
+x1 nS A1 Vout S dacpassgate
+x2 S A0 Vout nS dacpassgate
+x3 nS S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+.ends
+
+
+* expanding   symbol:  dacpassgate.sym # of pins=4
+** sym_path: /home/reg/sardesign/saradcspr2022/dacpassgate.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/dacpassgate.sch
+.subckt dacpassgate  GP A Z GN
+*.iopin A
+*.iopin Z
+*.ipin GP
+*.ipin GN
+XM1 Z GN A GND sky130_fd_pr__nfet_01v8 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+XM2 Z GP A VDD sky130_fd_pr__pfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+.ends
+
+
+* expanding   symbol:  not.sym # of pins=2
+** sym_path: /home/reg/sardesign/saradcspr2022/not.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/not.sch
+.subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
+*.opin y
+*.ipin a
+XM1 y a VSSPIN VSSPIN sky130_fd_pr__nfet_01v8 L=L_N W=W_N nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+XM2 y a VCCPIN VCCPIN sky130_fd_pr__pfet_01v8 L=L_P W=W_P nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+.GLOBAL GND
+.GLOBAL VDD
+.end

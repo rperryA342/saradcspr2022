@@ -2,17 +2,19 @@
 
 .option scale=10000u
 
-.subckt caparray vcommon B0 B1 B2 B3 B4 
-X0 B0 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X1 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X2 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X3 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X4 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X5 B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X6 B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X7 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X8 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
-X9 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+.subckt caparray vcommon B50 B0 B1 B2 B3 B4 
+
+X50 B50 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X0  B0 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X1  B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X2  B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X3  B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X4  B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X5  B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X6  B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X7  B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X8  B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X9  B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X10 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X11 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X12 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000

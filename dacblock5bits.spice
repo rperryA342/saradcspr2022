@@ -1,81 +1,24 @@
-** sch_path: /home/reg/sardesign/saradcspr2022/dacblock_test.sch
-
-
-.param vONE=2
-.param AGND=1
-.param rt=5n
-.param pw=250n
-.param t0=100n
-.param t0r=t0+rt
-.param t1=t0r+pw
-.param t1r=t1+rt
-.param t2=t1r+pw
-.param t2r=t2+rt
-.param t3=t2r+pw
-.param t3r=t3+rt
-.param t4=t3r+pw
-.param t4r=t4+rt
-.param t5=t4r+pw
-.param t5r=t5+rt
-.param t6=t5r+pw
-.param t6r=t6+rt
-.param t7=t6r+pw
-.param t7r=t7+rt
-.param b2d=VONE
-.param b1d=0
-.param b0d=VONE
-.param vadc=(b2d/4)+(b1d/8)+(b0d/16)+AGND
-
-
-
-**.subckt dacblock_test Vin AGND VREF SH B0 B1 B2 CompOut
-*.ipin Vin
-*.ipin AGND
-*.ipin VREF
-*.ipin SH
+** sch_path: /home/reg/sardesign/saradcspr2022/dacblock5bits.sch
+**.subckt dacblock5bits B0 B1 B2 B3 B4 Vin SH CompOut AGND VREF
 *.ipin B0
 *.ipin B1
 *.ipin B2
+*.ipin B3
+*.ipin B4
+*.ipin Vin
+*.ipin SH
 *.opin CompOut
-Vmax VDD GND 2
-XC1 Vcommon c1v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
-Vmax1 Vin GND {vadc}
-Vmax3 AGND GND 1
-V4 SH GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0)
-XC5 CompOut GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
-Vmax4 VREF GND 2
-XC2 Vcommon c2v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
-V1 B1 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t4} 0 {t4r} 2 {t5} 2 {t5r} {b1d})
-x3 Vcommon AGND CompOut skywater_comparator
-V3 B0 GND dc 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t6} 0 {t6r} 2 {t7} 2 {t7r} {b0d})
-V5 B2 GND DC 0 pwl (0n 0 {t0} 0 {t0r} 2 {t1} 2 {t1r} 0 {t2} 0 {t2r} 2 {t3} 2 {t3r} {b2d})
-XC6 Vcommon c4v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=4 m=4
-XC7 Vcommon c3v sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=2 m=2
-x1 c4v SH Vin AGND VREF AGND B2 4x1analogmux
-x2 c3v SH Vin AGND VREF AGND B1 4x1analogmux
-x4 c2v SH Vin AGND VREF AGND B0 4x1analogmux
-x5 c1v Vin AGND SH 2x1analogmux
-x6 AGND SH net1 analog_switch
-Vswitch net1 Vcommon 0
-XC3 AGND GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
-**** begin user architecture code
-
-
-.include opamp_sky130.sp
-
-.tran 0.1u 2u
-.control
-run
-**plot i(Vswitch)
-.endc
-
-
-
-** opencircuitdesign pdks install
-.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
-
-
-**** end user architecture code
+*.iopin AGND
+*.iopin VREF
+x3 vcommon AGND CompOut skywater_comparator
+x1 C16 SH Vin AGND VREF AGND B4 4x1analogmux
+x2 C8 SH Vin AGND VREF AGND B3 4x1analogmux
+x4 C4 SH Vin AGND VREF AGND B2 4x1analogmux
+x5 C0 Vin AGND SH 2x1analogmux
+x6 AGND SH vcommon analog_switch
+x7 C2 SH Vin AGND VREF AGND B1 4x1analogmux
+x8 C1 SH Vin AGND VREF AGND B0 4x1analogmux
+x9 vcommon C0 C1 C2 C4 C8 C16 caparray
 **.ends
 
 * expanding   symbol:  skywater_comparator.sym # of pins=3
@@ -85,8 +28,8 @@ run
 *.ipin Vpos
 *.ipin Vmin
 *.opin Y
-x1 Y net1 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
-x2 Vmin Vpos net1 VDD GND opamp_sky130
+x1 Y A VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
+x2 Vmin Vpos A VDD GND opamp_sky130
 .ends
 
 
@@ -164,6 +107,6 @@ XM2 Z GP A VDD sky130_fd_pr__pfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf *
 + sa=0 sb=0 sd=0 mult=10 m=10
 .ends
 
-.GLOBAL GND
 .GLOBAL VDD
+.GLOBAL GND
 .end

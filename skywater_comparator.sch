@@ -24,7 +24,7 @@ N 310 -110 310 -90 { lab=GND}
 N 310 -90 310 -70 { lab=GND}
 N 310 -210 310 -190 { lab=VDD}
 N 210 -130 260 -130 { lab=Vmin}
-N 360 -150 410 -150 { lab=#net1}
+N 360 -150 410 -150 { lab=xxx}
 N 210 -170 260 -170 { lab=Vpos}
 N 490 -150 520 -150 { lab=Y}
 C {./symbols/vdd.sym} 310 -210 0 0 {name=l1 lab=VDD}
@@ -36,3 +36,4 @@ C {symbols/ipin.sym} 210 -170 0 0 {name=p1 lab=Vpos}
 C {symbols/ipin.sym} 210 -130 0 0 {name=p2 lab=Vmin}
 C {symbols/opin.sym} 520 -150 0 0 {name=p3 lab=Y}
 C {opamp_sky130.sym} 240 -100 0 0 {name=x2}
+C {symbols/lab_wire.sym} 390 -150 0 0 {name=l3 sig_type=std_logic lab=A}
