@@ -1,4 +1,4 @@
-** sch_path: /home/reg/sardesign/saradcspr2022/inverter_test.sch
+** sch_path: /home/rperry/saradcspr2022/not_test.sch
 
 
 .param vONE=2
@@ -39,15 +39,18 @@
 
 
 
-**.subckt inverter_test
+**.subckt not_test
 Vmax VDD GND 2
 V4 S0 GND DC 0 pulse(0 {VONE} 0 50n 50n {pw} {2*pw})
-C1 Out GND 1p m=1
-x1 Out S0 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+x1 net1 S0 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+x2 GND net1 net1 net1 net1 net1 net1 caparray
 **** begin user architecture code
 
 
-.include opamp_sky130.sp
+
+
+
+**.include opamp_sky130.sp
 .include spice/caparray.sp
 
 .control
@@ -56,15 +59,15 @@ x1 Out S0 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 
 
 ** opencircuitdesign pdks install
-.lib /home/reg/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.lib /home/rperry/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
 
 
 **** end user architecture code
 **.ends
 
 * expanding   symbol:  not.sym # of pins=2
-** sym_path: /home/reg/sardesign/saradcspr2022/not.sym
-** sch_path: /home/reg/sardesign/saradcspr2022/not.sch
+** sym_path: /home/rperry/saradcspr2022/not.sym
+** sch_path: /home/rperry/saradcspr2022/not.sch
 .subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
 *.opin y
 *.ipin a

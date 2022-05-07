@@ -1,0 +1,112 @@
+** sch_path: /home/reg/sardesign/saradcspr2022/dacblock5bits.sch
+**.subckt dacblock5bits B0 B1 B2 B3 B4 Vin SH CompOut AGND VREF
+*.ipin B0
+*.ipin B1
+*.ipin B2
+*.ipin B3
+*.ipin B4
+*.ipin Vin
+*.ipin SH
+*.opin CompOut
+*.iopin AGND
+*.iopin VREF
+x3 vcommon AGND CompOut skywater_comparator
+x1 C16 SH Vin AGND VREF AGND B4 4x1analogmux
+x2 C8 SH Vin AGND VREF AGND B3 4x1analogmux
+x4 C4 SH Vin AGND VREF AGND B2 4x1analogmux
+x5 C0 Vin AGND SH 2x1analogmux
+x6 AGND SH vcommon analog_switch
+x7 C2 SH Vin AGND VREF AGND B1 4x1analogmux
+x8 C1 SH Vin AGND VREF AGND B0 4x1analogmux
+x9 vcommon C0 C1 C2 C4 C8 C16 caparray
+**.ends
+
+* expanding   symbol:  skywater_comparator.sym # of pins=3
+** sym_path: /home/reg/sardesign/saradcspr2022/skywater_comparator.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/skywater_comparator.sch
+.subckt skywater_comparator  Vmin Vpos Y
+*.ipin Vpos
+*.ipin Vmin
+*.opin Y
+x1 Y A VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
+x2 Vmin Vpos A VDD GND opamp_sky130
+.ends
+
+
+* expanding   symbol:  4x1analogmux.sym # of pins=7
+** sym_path: /home/reg/sardesign/saradcspr2022/4x1analogmux.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/4x1analogmux.sch
+.subckt 4x1analogmux  Vout S1 A3 A2 A1 A0 S0
+*.ipin A3
+*.ipin A2
+*.ipin A1
+*.ipin A0
+*.ipin S1
+*.ipin S0
+*.opin Vout
+x2 net2 A1 A0 S0 2x1analogmux
+x3 Vout net1 net2 S1 2x1analogmux
+x1 net1 A3 A2 S0 2x1analogmux
+.ends
+
+
+* expanding   symbol:  2x1analogmux.sym # of pins=4
+** sym_path: /home/reg/sardesign/saradcspr2022/2x1analogmux.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/2x1analogmux.sch
+.subckt 2x1analogmux  Vout A1 A0 S
+*.ipin S
+*.opin Vout
+*.ipin A1
+*.ipin A0
+x1 net1 A1 Vout S dacpassgate
+x2 S A0 Vout net1 dacpassgate
+x3 net1 S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+.ends
+
+
+* expanding   symbol:  analog_switch.sym # of pins=3
+** sym_path: /home/reg/sardesign/saradcspr2022/analog_switch.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/analog_switch.sch
+.subckt analog_switch  Vin S Vout
+*.ipin S
+*.ipin Vin
+*.opin Vout
+x1 net1 Vin Vout S dacpassgate
+x2 net1 S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+.ends
+
+
+* expanding   symbol:  not.sym # of pins=2
+** sym_path: /home/reg/sardesign/saradcspr2022/not.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/not.sch
+.subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
+*.opin y
+*.ipin a
+XM1 y a VSSPIN VSSPIN sky130_fd_pr__nfet_01v8 L=L_N W=W_N nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+XM2 y a VCCPIN VCCPIN sky130_fd_pr__pfet_01v8 L=L_P W=W_P nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+
+* expanding   symbol:  dacpassgate.sym # of pins=4
+** sym_path: /home/reg/sardesign/saradcspr2022/dacpassgate.sym
+** sch_path: /home/reg/sardesign/saradcspr2022/dacpassgate.sch
+.subckt dacpassgate  GP A Z GN
+*.iopin A
+*.iopin Z
+*.ipin GP
+*.ipin GN
+XM1 Z GN A GND sky130_fd_pr__nfet_01v8 L=0.5 W=1 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+XM2 Z GP A VDD sky130_fd_pr__pfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=10 m=10
+.ends
+
+.GLOBAL VDD
+.GLOBAL GND
+.end

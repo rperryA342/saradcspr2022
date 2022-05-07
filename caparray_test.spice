@@ -1,0 +1,35 @@
+** sch_path: /home/reg/sardesign/saradcspr2022/caparray_test.sch
+
+
+
+Vx VA GND DC 5 
+x1 GND VA VA VA VA VA VA caparray
+ 
+**** begin user architecture code
+
+
+.include spice/caparray.sp 
+
+.control
+run
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+
+
+
+
+
+
+
+
+
+
+.GLOBAL GND
+.GLOBAL VDD
+.end

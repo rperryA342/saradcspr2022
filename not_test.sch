@@ -23,17 +23,23 @@ E {}
 N -220 -610 -220 -580 { lab=S0}
 N -220 -610 -150 -610 { lab=S0}
 N 10 -120 90 -120 {
-lab=Out}
-N 60 -120 60 -110 {
-lab=Out}
+lab=#net1}
 N -190 -120 -120 -120 {
 lab=S0}
 N -40 -120 10 -120 {
-lab=Out}
+lab=#net1}
+N 90 -120 160 -120 { lab=#net1}
+N 100 -100 160 -100 { lab=#net1}
+N 100 -100 100 -20 { lab=#net1}
+N 100 -20 160 -20 { lab=#net1}
+N 100 -40 160 -40 { lab=#net1}
+N 100 -60 160 -60 { lab=#net1}
+N 100 -80 160 -80 { lab=#net1}
+N 100 -120 100 -100 { lab=#net1}
 C {symbols/code.sym} 60 -395 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "opamp_sky130.sp"
+**.include "opamp_sky130.sp"
 .include "spice/caparray.sp"
 
 .control
@@ -93,14 +99,9 @@ value="
 .param vadc=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)+AGND
 
 "}
-C {symbols/gnd.sym} 60 -50 0 0 {name=l13 lab=GND}
-C {symbols/lab_wire.sym} 90 -120 0 1 {name=l19 sig_type=std_logic lab=Out}
-C {symbols/capa.sym} 60 -80 0 0 {name=C1
-m=1
-value=1p
-footprint=1206
-device="ceramic capacitor"}
 C {symbols/lab_pin.sym} -190 -120 0 0 {name=l2 sig_type=std_logic lab=S0}
 C {not.sym} -80 -120 0 0 {name=x1 m=1 
 + W_N=1 L_N=0.15 W_P=2 L_P=0.15 
 + VCCPIN=VDD VSSPIN=GND}
+C {caparray.sym} 180 -140 1 0 {name=x2}
+C {symbols/gnd.sym} 210 10 0 0 {name=l1 lab=GND}

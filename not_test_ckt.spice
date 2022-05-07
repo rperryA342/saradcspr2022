@@ -1,0 +1,132 @@
+** sch_path: /home/rperry/saradcspr2022/not_test_x.sch
+
+
+.param vONE=2
+.param AGND=1
+.param rt=5n
+.param pw=500u
+.param t0=0n
+.param t0r=t0+rt
+.param t1=t0r+pw
+.param t1r=t1+rt
+.param t2=t1r+pw
+.param t2r=t2+rt
+.param t3=t2r+pw
+.param t3r=t3+rt
+.param t4=t3r+pw
+.param t4r=t4+rt
+.param t5=t4r+pw
+.param t5r=t5+rt
+.param t6=t5r+pw
+.param t6r=t6+rt
+.param t7=t6r+pw
+.param t7r=t7+rt
+.param t8=t7r+pw
+.param t8r=t8+rt
+.param t9=t8r+pw
+.param t9r=t9+rt
+.param t10=t9r+pw
+.param t10r=t10+rt
+.param t11=t10r+pw
+.param t11r=t11+rt
+
+.param b4d=VONE
+.param b3d=0
+.param b2d=VONE
+.param b1d=0
+.param b0d=VONE
+.param vadc=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)+AGND
+
+
+
+**.subckt not_test
+Vmax VDD GND 2
+V4 S0 GND DC 0 pulse(0 {VONE} 0 50n 50n {pw} {2*pw})
+x1 net1 S0 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
+x2 GND net1 net1 net1 net1 net1 net1 caparray_ckt
+x3 GND net1 net1 net1 net1 net1 net1 caparray
+
+**** begin user architecture code
+
+
+
+.subckt caparray_ckt vcommon B50 B0 B1 B2 B3 B4
+
+X50 B50 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X0 B0 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X1 B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X2 B1 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X20 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X21 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X22 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X23 B2 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X30 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X31 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X32 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X33 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X34 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X35 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X36 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X37 B3 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X40 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X41 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X42 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X43 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X44 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X45 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X46 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X47 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X48 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X49 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X410 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X411 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X412 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X413 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X414 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+X415 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
+
+
+
+
+**c0 B50 vcommon 1p
+**c1 B0 vcommon 1p
+**c2 B1 vcommon 1p
+**c4 B2 vcommon 1p
+**c5 B3 vcommon 1p
+*c6 B4 vcommon 1p
+.ends
+
+**.include opamp_sky130.sp
+.include spice/caparray.sp
+
+.control
+run
+op
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /home/rperry/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  not.sym # of pins=2
+** sym_path: /home/rperry/saradcspr2022/not.sym
+** sch_path: /home/rperry/saradcspr2022/not.sch
+.subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
+*.opin y
+*.ipin a
+XM1 y a VSSPIN VSSPIN sky130_fd_pr__nfet_01v8 L=L_N W=W_N nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+XM2 y a VCCPIN VCCPIN sky130_fd_pr__pfet_01v8 L=L_P W=W_P nf=1 ad='int((nf+1)/2) * W/nf * 0.29' as='int((nf+2)/2) * W/nf * 0.29'
++ pd='2*int((nf+1)/2) * (W/nf + 0.29)' ps='2*int((nf+2)/2) * (W/nf + 0.29)' nrd='0.29 / W' nrs='0.29 / W'
++ sa=0 sb=0 sd=0 mult=1 m=1
+.ends
+
+.GLOBAL GND
+.GLOBAL VDD
+.end
