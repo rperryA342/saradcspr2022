@@ -1,14 +1,15 @@
-** sch_path: /home/rperry/xschem_skywater/sar_adc_design/saradc2022/sar5bitsreg_test.sch
+** sch_path: /home/rperry/saradcspr2022/sar5bitsreg_test.sch
 
 
 .param vONE=2
 .param vADC=1
+.param pw=2u
 
 
 **.subckt sar5bitsreg_test
 Vmax VDD GND 2
 V4 reset GND DC 0 pwl (0n 0 1u 0 1010n 2)
-V1 clock GND DC 2 pulse(0 2 0 10n 10n 1u 2u)
+V1 clock GND DC 2 pulse(0 2 0 10n 10n {pw} {2*pw})
 V3 nStartCnv GND dc 2 pwl (0n 2 3u 2 3010n 0)
 XC2 D2 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
 XC3 D1 GND sky130_fd_pr__cap_mim_m3_1 W=10 L=10 MF=1 m=1
@@ -39,8 +40,10 @@ run
 
 
 ** opencircuitdesign pdks install
-.lib /usr/local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
-.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.lib /home/rperry/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.include /home/rperry/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /home/rperry/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice
+.include /home/rperry/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__fill_12.spice
 **.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
 
 

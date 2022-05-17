@@ -20,7 +20,7 @@ K {}
 V {}
 S {}
 E {}
-N 520 -190 630 -190 { lab=Vcommon}
+N 520 -190 630 -190 { lab=vcommon}
 N 630 -150 630 -80 { lab=AGND}
 N 730 -170 810 -170 { lab=CompOut}
 N -770 -360 -770 -340 { lab=Vin}
@@ -82,8 +82,6 @@ N 150 70 150 100 { lab=c3v}
 N -660 -360 -580 -360 { lab=AGND}
 N -660 -360 -660 -340 { lab=AGND}
 N -660 -280 -580 -280 { lab=GND}
-N 380 420 470 420 {
-lab=c1v}
 N -530 -160 -530 -110 { lab=SH}
 N -530 -110 -530 70 { lab=SH}
 N -530 70 -530 240 { lab=SH}
@@ -104,56 +102,57 @@ N -650 260 -650 420 { lab=Vin}
 N -720 320 -720 440 { lab=AGND}
 N -530 460 -530 570 { lab=SH}
 N -720 440 -720 550 { lab=AGND}
-N 250 240 450 240 {
-lab=c2v}
-N 150 70 430 70 {
-lab=c3v}
 N 570 -190 570 550 {
-lab=Vcommon}
+lab=vcommon}
 N 470 550 570 550 {
-lab=Vcommon}
+lab=vcommon}
 N -130 550 470 550 {
-lab=Vcommon}
+lab=vcommon}
 N 490 -140 490 420 {
-lab=c1v}
+lab=#net1}
 N 470 420 490 420 {
-lab=c1v}
+lab=#net1}
 N 470 -140 470 240 {
-lab=c2v}
+lab=#net2}
 N 450 240 470 240 {
-lab=c2v}
+lab=#net2}
 N 450 -140 450 70 {
-lab=c3v}
+lab=#net3}
 N 440 70 450 70 {
-lab=c3v}
+lab=#net3}
 N 430 -140 430 -120 {
-lab=c4v}
-N 30 -110 430 -110 {
-lab=c4v}
+lab=#net4}
 N 430 -120 430 -110 {
-lab=c4v}
+lab=#net4}
 N 570 -260 570 -200 {
-lab=Vcommon}
+lab=vcommon}
 N 570 -200 570 -190 {
-lab=Vcommon}
+lab=vcommon}
 N 390 -140 410 -140 {
-lab=GND}
+lab=vcommon}
 N 340 -140 390 -140 {
-lab=GND}
-N 340 -140 340 -90 {
-lab=GND}
-N 430 70 440 70 {
-lab=c3v}
+lab=vcommon}
+N 680 -130 680 -100 { lab=GND}
+N 680 -240 680 -210 { lab=VDD}
+N 340 -240 340 -140 { lab=vcommon}
+N 340 -240 570 -240 { lab=vcommon}
+N 30 -110 160 -110 { lab=c4v}
+N 220 -110 430 -110 { lab=#net4}
+N 150 70 230 70 { lab=c3v}
+N 290 70 440 70 { lab=#net3}
+N 250 240 310 240 { lab=c2v}
+N 370 240 450 240 { lab=#net2}
+N 380 420 410 420 { lab=c1v}
 C {symbols/code.sym} 60 -395 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "spice/opamp_sky130.sp"
-.include "spice/caparray.sp"
 
-.tran 0.1u 2u
+**.include "spice/caparray.sp"
+
+.tran 0.1u 10u
 .control
 run
-**plot i(Vswitch)
+plot v(vcommon) v(sh)
 .endc
 " }
 C {symbols/code.sym} 200 -390 0 0 {name=TT_MODELS
@@ -184,13 +183,12 @@ C {symbols/lab_wire.sym} 840 -170 0 0 {name=l30 sig_type=std_logic lab=CompOut}
 C {symbols/vsource.sym} -470 -310 0 0 {name=Vmax4 value=2}
 C {symbols/gnd.sym} -470 -280 0 0 {name=l31 lab=GND}
 C {symbols/lab_wire.sym} -470 -360 0 0 {name=l32 sig_type=std_logic lab=VREF}
-C {symbols/lab_wire.sym} 570 -260 0 0 {name=l33 sig_type=std_logic lab=Vcommon}
+C {symbols/lab_wire.sym} 570 -260 0 0 {name=l33 sig_type=std_logic lab=vcommon}
 C {symbols/lab_wire.sym} 350 450 0 0 {name=l37 sig_type=std_logic lab=c1v}
 C {symbols/vsource.sym} -720 -480 0 0 {name=V1 value="DC 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t4\} 0 \{t4r\} 2 \{t5\} 2 \{t5r\} \{b1d\})"}
 C {symbols/gnd.sym} -720 -450 0 0 {name=l8 lab=GND}
 C {symbols/lab_pin.sym} -650 -540 0 1 {name=x11 sig_type=std_logic lab=B1}
 C {symbols/lab_wire.sym} 220 270 0 0 {name=l23 sig_type=std_logic lab=c2v}
-C {skywater_comparator.sym} 610 -220 2 1 {name=x3}
 C {symbols/vsource.sym} -240 -470 0 0 {name=V3 value="dc 0 pwl (0n 0 \{t0\} 0 \{t0r\} 2 \{t1\} 2 \{t1r\} 0 \{t6\} 0 \{t6r\} 2 \{t7\} 2 \{t7r\} \{b0d\})"}
 C {symbols/gnd.sym} -240 -440 0 0 {name=l25 lab=GND}
 C {symbols/lab_pin.sym} -170 -530 0 1 {name=x26 sig_type=std_logic lab=B0}
@@ -204,7 +202,7 @@ value="
 .param vONE=2
 .param AGND=1
 .param rt=5n
-.param pw=250n
+.param pw=2u
 .param t0=100n
 .param t0r=t0+rt
 .param t1=t0r+pw
@@ -223,8 +221,9 @@ value="
 .param t7r=t7+rt
 .param b2d=VONE
 .param b1d=0
-.param b0d=VONE
-.param vadc=(b2d/4)+(b1d/8)+(b0d/16)+AGND
+.param b0d=0
+.param vpcomp=(b2d/2)+(b1d/4)+(b0d/8)
+.param vadc=AGND+vpcomp/2
 
 "}
 C {4x1analogmux.sym} -290 -60 0 0 {name=x1}
@@ -242,4 +241,10 @@ C {analog_switch.sym} -280 560 0 0 {name=x6}
 C {symbols/cap_mim_m3_1.sym} -660 -310 0 0 {name=C3 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}
 C {symbols/opin.sym} 840 -170 0 0 {name=p1 lab=CompOut}
 C {caparray.sym} 370 -160 0 0 {name=x7}
-C {symbols/gnd.sym} 340 -90 0 0 {name=l1 lab=GND}
+C {simpleComp.sym} 610 -120 0 0 {name=x3}
+C {symbols/vdd.sym} 680 -240 0 0 {name=l2 lab=VDD}
+C {symbols/gnd.sym} 680 -100 0 0 {name=l5 lab=GND}
+C {symbols/vsource.sym} 190 -110 3 0 {name=Vc4 value=0}
+C {symbols/vsource.sym} 260 70 3 0 {name=Vc3 value=0}
+C {symbols/vsource.sym} 340 240 3 0 {name=Vc2 value=0}
+C {symbols/vsource.sym} 440 420 3 0 {name=Vc1 value=0}

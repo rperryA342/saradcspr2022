@@ -130,7 +130,7 @@ N -130 760 290 760 {
 lab=C0}
 N -130 240 230 240 { lab=C4}
 N 70 890 370 890 { lab=vcommon}
-N 640 -190 680 -190 { lab=CompOut}
+N 680 -170 720 -170 { lab=CompOut}
 N 420 -80 420 880 {
 lab=vcommon}
 N 370 890 420 890 {
@@ -139,11 +139,15 @@ N 420 880 420 890 {
 lab=vcommon}
 N 320 -190 480 -190 {
 lab=vcommon}
-N 560 -190 640 -190 {
+N 600 -170 680 -170 {
 lab=CompOut}
 N 420 -190 420 -80 {
 lab=vcommon}
-N 480 -190 500 -190 {}
+N 480 -190 500 -190 { lab=vcommon}
+N 470 -150 500 -150 { lab=AGND}
+N 470 -150 470 -110 { lab=AGND}
+N 550 -130 550 -100 { lab=GND}
+N 550 -230 550 -210 { lab=Vdd}
 C {4x1analogmux.sym} -280 -60 0 0 {name=x1}
 C {4x1analogmux.sym} -280 120 0 0 {name=x2}
 C {4x1analogmux.sym} -280 290 0 0 {name=x4}
@@ -163,7 +167,7 @@ C {symbols/ipin.sym} -980 -150 1 0 {name=p5 lab=B4
 }
 C {symbols/ipin.sym} -650 -150 1 0 {name=p8 lab=Vin}
 C {symbols/ipin.sym} -530 -160 1 0 {name=p9 lab=SH}
-C {symbols/opin.sym} 680 -190 0 0 {name=p10 lab=CompOut}
+C {symbols/opin.sym} 720 -170 0 0 {name=p10 lab=CompOut}
 C {symbols/iopin.sym} -720 -150 3 0 {name=p7 lab=AGND}
 C {symbols/iopin.sym} -800 -150 3 0 {name=p6 lab=VREF}
 C {symbols/lab_wire.sym} 20 -110 0 0 {name=l1 sig_type=std_logic lab=C16}
@@ -174,8 +178,7 @@ C {symbols/lab_wire.sym} 10 590 0 0 {name=l5 sig_type=std_logic lab=C1}
 C {symbols/lab_wire.sym} 0 760 0 0 {name=l7 sig_type=std_logic lab=C0}
 C {symbols/lab_wire.sym} 0 890 0 0 {name=l8 sig_type=std_logic lab=vcommon}
 C {caparray.sym} 170 -160 0 0 {name=x9}
-C {symbols/res.sym} 530 -190 1 0 {name=R1
-value=1k
-footprint=1206
-device=resistor
-m=1}
+C {symbols/lab_pin.sym} 550 -100 3 0 {name=l6 sig_type=std_logic lab=GND}
+C {symbols/lab_pin.sym} 550 -230 1 0 {name=l9 sig_type=std_logic lab=VDD}
+C {symbols/lab_pin.sym} 470 -110 3 0 {name=l10 sig_type=std_logic lab=AGND}
+C {simpleComp.sym} 480 -120 0 0 {name=x3}

@@ -1,4 +1,4 @@
-** sch_path: /home/rperry/saradcspr2022/not_test.sch
+** sch_path: /home/rperry/saradcspr2022/simpleComp_test.sch
 
 
 .param vONE=2
@@ -39,17 +39,16 @@
 
 
 
-**.subckt not_test
+**.subckt simpleComp_test
 Vmax VDD GND 2
-V4 S0 GND DC 0 pulse(0 {VONE} 0 50n 50n {pw} {2*pw})
-x1 net1 S0 VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
-x2 GND net1 net1 net1 net1 net1 net1 caparray
+VIN Vin GND DC 0 pulse(0 {VONE} 0 50n 50n {pw} {2*pw})
+x1 AGND Vin Vout VDD GND simpleComp
+Vmax1 AGND GND 1
+XC1 Vout GND sky130_fd_pr__cap_mim_m3_1 W=1 L=1 MF=1 m=1
 **** begin user architecture code
 
 
-**.include opamp_sky130.sp
-.include spice/caparray.sp
-
+.dc VIN 0 2 0.01
 .control
 .endc
 
@@ -61,6 +60,30 @@ x2 GND net1 net1 net1 net1 net1 net1 caparray
 
 **** end user architecture code
 **.ends
+
+* expanding   symbol:  simpleComp.sym # of pins=5
+** sym_path: /home/rperry/saradcspr2022/simpleComp.sym
+** sch_path: /home/rperry/saradcspr2022/simpleComp.sch
+.subckt simpleComp  Vm Vp Vout VDDPIN GNDPIN
+*.ipin Vp
+*.ipin Vm
+*.opin Vout
+*.iopin VDDPIN
+*.iopin GNDPIN
+C7 GP 0 4f m=1
+XM4 SP GNDPIN VDDPIN VDDPIN sky130_fd_pr__pfet_01v8 L=1 W=0.55 nf=1 ad='W * 0.29' as='W * 0.29' pd='W + 2 * 0.29'
++ ps='W + 2 * 0.29' nrd=0 nrs=0 sa=0 sb=0 sd=0 mult=1 m=1
+XM18 diffout GP GNDPIN GNDPIN sky130_fd_pr__nfet_01v8_lvt L=1 W=1 nf=1 ad='W * 0.29' as='W * 0.29' pd='2*(W + 0.29)'
++ ps='2*(W + 0.29)' nrd=0 nrs=0 sa=0 sb=0 sd=0 mult=1 m=1
+XM19 GP GP GNDPIN GNDPIN sky130_fd_pr__nfet_01v8_lvt L=1 W=1 nf=1 ad='W * 0.29' as='W * 0.29' pd='2*(W + 0.29)'
++ ps='2*(W + 0.29)' nrd=0 nrs=0 sa=0 sb=0 sd=0 mult=1 m=1
+XM20 diffout Vp SP VDDPIN sky130_fd_pr__pfet_01v8_lvt L=0.35 W=1 nf=1 ad='W * 0.29' as='W * 0.29' pd='2*(W + 0.29)'
++ ps='2*(W + 0.29)' nrd=0 nrs=0 sa=0 sb=0 sd=0 mult=1 m=1
+XM21 GP Vm SP VDDPIN sky130_fd_pr__pfet_01v8_lvt L=0.35 W=1 nf=1 ad='W * 0.29' as='W * 0.29' pd='2*(W + 0.29)'
++ ps='2*(W + 0.29)' nrd=0 nrs=0 sa=0 sb=0 sd=0 mult=1 m=1
+x1 Vout diffout VDDPIN GNDPIN not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
+.ends
+
 
 * expanding   symbol:  not.sym # of pins=2
 ** sym_path: /home/rperry/saradcspr2022/not.sym

@@ -66,7 +66,7 @@ C {ug_sample_hold.sym} 240 -240 0 0 {name=x2}
 C {symbols/vsource.sym} 40 -530 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} 40 -500 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} 40 -560 0 0 {name=l4 lab=VDD}
-C {symbols/vsource.sym} 140 -530 0 0 {name=Vmax1 value="sin(1.5 0.5 10000 2u )"}
+C {symbols/vsource.sym} 140 -530 0 0 {name=Vmax1 value="sin(1.5 0.5 1 \{pw\})"}
 C {symbols/gnd.sym} 140 -500 0 0 {name=l14 lab=GND}
 C {symbols/vsource.sym} 330 -530 0 0 {name=Vmax3 value=1}
 C {symbols/gnd.sym} 330 -500 0 0 {name=l18 lab=GND}
@@ -78,9 +78,9 @@ C {symbols/lab_wire.sym} 440 -580 0 0 {name=l32 sig_type=std_logic lab=VREF}
 C {symbols/code.sym} 720 -595 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "./spice/opamp_sky130.sp"
+**.include "./spice/opamp_sky130.sp"
 .include "./spice/sar5bitsreg.sp"
-.include "./spice/caparray.sp"
+**.include "./spice/caparray.sp"
 
 .op
 .control
@@ -104,14 +104,15 @@ spice_ignore=false}
 C {symbols/code.sym} 570 -590 0 0 {name=codeHeader only_toplevel=true place=header
 value="
 .param vONE=2
-.param vadc=1.5
+.param vadc=1.6
+.param pw=2u
 "}
 C {symbols/lab_wire.sym} 490 -450 0 0 {name=l1 sig_type=std_logic lab=VREF}
 C {symbols/lab_wire.sym} 40 -250 0 0 {name=l5 sig_type=std_logic lab=Vin}
 C {symbols/vsource.sym} 30 -730 0 0 {name=V4 value="DC 0 pwl (0n 0 500n 0 510n 2)"}
 C {symbols/gnd.sym} 30 -700 0 0 {name=l21 lab=GND}
 C {symbols/lab_pin.sym} 100 -790 0 1 {name=x22 sig_type=std_logic lab=reset}
-C {symbols/vsource.sym} 350 -730 0 0 {name=V1 value="DC 2 pulse(0 2 0 10n 10n 1u 2u)"}
+C {symbols/vsource.sym} 350 -730 0 0 {name=V1 value="DC 2 pulse(0 2 0 10n 10n \{pw\} \{2*pw\})"}
 C {symbols/gnd.sym} 350 -700 0 0 {name=l8 lab=GND}
 C {symbols/lab_pin.sym} 420 -790 0 1 {name=x11 sig_type=std_logic lab=clock}
 C {symbols/vsource.sym} 830 -720 0 0 {name=V3 value="dc 2 pwl (0n 2 1.5u 2 1.51u 0)"}

@@ -1,0 +1,26 @@
+** sch_path: /home/rperry/saradcspr2022/test_sky_cap.sch
+**.subckt test_sky_cap
+I1 0 G pwl 0 0 1000n 0 1010n 100n
+R1 G REF 1G m=1
+I3 0 G2 pwl 0 0 1000n 0 1010n 100n
+R3 G2 REF 1G m=1
+C1 G2 0 20p m=1
+V1 REF 0 -2
+XC2 G 0 sky130_fd_pr__cap_mim_m3_1 W=100 L=100 MF=2 m=2
+**** begin user architecture code
+
+
+.control
+tran 10n 2u
+plot g g2
+.endc
+
+
+
+** opencircuitdesign pdks install
+.lib /home/rperry/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+
+**** end user architecture code
+**.ends
+.end

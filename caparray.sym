@@ -1,6 +1,6 @@
 v {xschem version=3.0.0 file_version=1.2 }
 G {}
-K {type=primative
+K {type=subcircuit
 format="@name @@vcommon @@C0 @@C1 @@C2 @@C4 @@C8 @@C16 @symname"
 template="name=x1"}
 V {}
@@ -18,19 +18,19 @@ L 4 100 0 100 20 {}
 L 4 130 -30 150 -30 {}
 L 4 120 0 120 20 {}
 B 5 147.5 -32.5 152.5 -27.5 {name=vcommon
-dir=in}
+dir=inout}
 B 5 97.5 17.5 102.5 22.5 {name=C1
-dir=in}
+dir=inout}
 B 5 77.5 17.5 82.5 22.5 {name=C2
-dir=in}
+dir=inout}
 B 5 57.5 17.5 62.5 22.5 {name=C4
-dir=in}
+dir=inout}
 B 5 17.5 17.5 22.5 22.5 {name=C16
-dir=in}
+dir=inout}
 B 5 117.5 17.5 122.5 22.5 {name=C0
-dir=in}
+dir=inout}
 B 5 37.5 17.5 42.5 22.5 {name=C8
-dir=in}
+dir=inout}
 T {vcommon} 100 -30 0 0 0.1 0.1 {}
 T {C16} 15 -10 0 0 0.1 0.1 {}
 T {C8} 35 -10 0 0 0.1 0.1 {}

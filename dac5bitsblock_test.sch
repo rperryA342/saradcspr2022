@@ -63,13 +63,12 @@ lab=CompOut}
 C {symbols/code.sym} 60 -395 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "opamp_sky130.sp"
-.include "spice/caparray.sp"
+**.include "spice/caparray.sp"
 
-.tran 0.1u 2u
+.tran 0.1u 120u
 .control
 run
-**plot i(Vswitch)
+plot v(CompOut) v(x1.vcommon)
 
 .endc
 " }
@@ -111,7 +110,7 @@ value="
 .param vONE=2
 .param AGND=1
 .param rt=5n
-.param pw=250n
+.param pw=10u
 .param t0=100n
 .param t0r=t0+rt
 .param t1=t0r+pw
@@ -142,7 +141,8 @@ value="
 .param b2d=VONE
 .param b1d=0
 .param b0d=VONE
-.param vadc=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)+AGND
+.param vpcomp=(b4d/2)+(b3d/4)+(b2d/8)+(b1d/16)+(b0d/32)
+.param vadc=(vpcomp/2)+AGND
 
 "}
 C {symbols/cap_mim_m3_1.sym} -660 -310 0 0 {name=C3 model=cap_mim_m3_1 W=10 L=10 MF=1 spiceprefix=X}

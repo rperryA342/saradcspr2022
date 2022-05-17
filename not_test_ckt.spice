@@ -4,7 +4,7 @@
 .param vONE=2
 .param AGND=1
 .param rt=5n
-.param pw=500u
+.param pw=1m
 .param t0=0n
 .param t0r=t0+rt
 .param t1=t0r+pw
@@ -85,15 +85,6 @@ X413 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X414 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 X415 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 
-
-
-
-**c0 B50 vcommon 1p
-**c1 B0 vcommon 1p
-**c2 B1 vcommon 1p
-**c4 B2 vcommon 1p
-**c5 B3 vcommon 1p
-*c6 B4 vcommon 1p
 .ends
 
 **.include opamp_sky130.sp
@@ -102,6 +93,7 @@ X415 B4 vcommon sky130_fd_pr__cap_mim_m3_1 l=1000 w=1000
 .control
 run
 op
+tran 0.1m 25m
 .endc
 
 
