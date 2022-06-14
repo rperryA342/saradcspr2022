@@ -125,19 +125,6 @@ run
 
 .endc
 " }
-C {symbols/code.sym} 860 -590 0 0 {name=TT_MODELS
-only_toplevel=true
-format="tcleval( @value )"
-value="
-** opencircuitdesign pdks install
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt
-.include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
-.include $::SKYWATER_STDCELLS/sky130_ef_sc_hd__decap_12.spice
-.include $::SKYWATER_STDCELLS/sky130_ef_sc_hd__fill_12.spice
-**.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_pr/spice/sky130_fd_pr__cap_mim_m3_1.model.spice
-
-"
-spice_ignore=false}
 C {symbols/code.sym} 570 -590 0 0 {name=codeHeader only_toplevel=true place=header
 value="
 .param vONE=2
@@ -189,3 +176,15 @@ C {symbols/cap_mim_m3_1.sym} 1240 150 0 0 {name=C12 model=cap_mim_m3_1 W=10 L=10
 C {symbols/lab_wire.sym} 1270 -10 0 1 {name=l19 sig_type=std_logic lab=D3}
 C {symbols/lab_wire.sym} 1360 -40 0 1 {name=l20 sig_type=std_logic lab=D4}
 C {symbols/lab_pin.sym} 220 -30 0 0 {name=x3 sig_type=std_logic lab=nStartCnv}
+C {symbols/code.sym} 860 -590 0 0 {name=TT_MODELS
+only_toplevel=true
+format="tcleval( @value )"
+value="
+** opencircuitdesign pdks install
+.lib $::SKYWATER_MODELS/sky130.lib.spice tt
+.include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
+.include $::SKYWATER_STDCELLS/sky130_ef_sc_hd__decap_12.spice
+
+
+"
+spice_ignore=false}

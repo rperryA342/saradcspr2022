@@ -23,11 +23,11 @@ E {}
 N -220 -610 -220 -580 { lab=S0}
 N -220 -610 -150 -610 { lab=S0}
 N 10 -120 90 -120 {
-lab=CompOut}
+lab=Out}
 N 240 -610 240 -580 { lab=B0}
 N 240 -610 310 -610 { lab=B0}
 N 60 -120 60 -110 {
-lab=CompOut}
+lab=Out}
 N -360 -100 -290 -100 {
 lab=S0}
 N -360 -120 -290 -120 {
@@ -35,8 +35,6 @@ lab=B0}
 C {symbols/code.sym} 60 -395 0 0 {name=NGSPICE
 only_toplevel=true
 value="
-.include "opamp_sky130.sp"
-.include "spice/caparray.sp"
 
 .tran 0.1u 2u
 .control

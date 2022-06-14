@@ -72,15 +72,6 @@ plot v(CompOut) v(x1.vcommon)
 
 .endc
 " }
-C {symbols/code.sym} 200 -390 0 0 {name=TT_MODELS
-only_toplevel=true
-format="tcleval( @value )"
-value="
-** opencircuitdesign pdks install
-.lib $::SKYWATER_MODELS/sky130.lib.spice tt
-
-"
-spice_ignore=false}
 C {symbols/vsource.sym} -870 -310 0 0 {name=Vmax value=2}
 C {symbols/gnd.sym} -870 -280 0 0 {name=l3 lab=GND}
 C {symbols/vdd.sym} -870 -340 0 0 {name=l4 lab=VDD}
@@ -169,3 +160,15 @@ m=1
 value=1p
 footprint=1206
 device="ceramic capacitor"}
+C {symbols/code.sym} 230 -380 0 0 {name=TT_MODELS
+only_toplevel=true
+format="tcleval( @value )"
+value="
+** opencircuitdesign pdks install
+.lib $::SKYWATER_MODELS/sky130.lib.spice tt
+.include $::SKYWATER_STDCELLS/sky130_fd_sc_hd.spice
+.include $::SKYWATER_STDCELLS/sky130_ef_sc_hd__decap_12.spice
+
+
+"
+spice_ignore=false}

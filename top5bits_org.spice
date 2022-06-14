@@ -1,4 +1,4 @@
-** sch_path: /home/reg/saradcspr2022/top5bits.sch
+** sch_path: /home/rperry/saradcspr2022/top5bits.sch
 
 
 .param vONE=2
@@ -15,7 +15,7 @@
 *.opin D3
 x2 dacvin Vin SH ug_sample_hold
 Vmax VDD GND 2
-Vmax1 Vin GND sin(1.5 0.5 1 {pw})
+Vmax1 Vin GND sin(1.5 0.5 10000 2u )
 Vmax3 AGND GND 1
 Vmax4 VREF GND 2
 V4 reset GND DC 0 pwl (0n 0 500n 0 510n 2)
@@ -40,9 +40,9 @@ run
 
 
 ** opencircuitdesign pdks install
-.lib /home/reg/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
-.include /home/reg/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
-.include /home/reg/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice
+.lib /home/rperry/OpenLane/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.include /home/rperry/OpenLane/pdks/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice
+.include /usr/local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice
 
 
 
@@ -50,8 +50,8 @@ run
 **.ends
 
 * expanding   symbol:  ug_sample_hold.sym # of pins=3
-** sym_path: /home/reg/saradcspr2022/ug_sample_hold.sym
-** sch_path: /home/reg/saradcspr2022/ug_sample_hold.sch
+** sym_path: /home/rperry/saradcspr2022/ug_sample_hold.sym
+** sch_path: /home/rperry/saradcspr2022/ug_sample_hold.sch
 .subckt ug_sample_hold  Vout Vin SHClk
 *.ipin Vin
 *.ipin SHClk
@@ -61,8 +61,8 @@ x1 Vin SHClk Vout analog_switch
 
 
 * expanding   symbol:  dacblock5bits.sym # of pins=10
-** sym_path: /home/reg/saradcspr2022/dacblock5bits.sym
-** sch_path: /home/reg/saradcspr2022/dacblock5bits.sch
+** sym_path: /home/rperry/saradcspr2022/dacblock5bits.sym
+** sch_path: /home/rperry/saradcspr2022/dacblock5bits.sch
 .subckt dacblock5bits  CompOut SH VREF B4 B3 B2 B1 B0 AGND Vin
 *.ipin B0
 *.ipin B1
@@ -87,8 +87,8 @@ x3 AGND vcommon CompOut VDD GND simpleComp
 
 
 * expanding   symbol:  analog_switch.sym # of pins=3
-** sym_path: /home/reg/saradcspr2022/analog_switch.sym
-** sch_path: /home/reg/saradcspr2022/analog_switch.sch
+** sym_path: /home/rperry/saradcspr2022/analog_switch.sym
+** sch_path: /home/rperry/saradcspr2022/analog_switch.sch
 .subckt analog_switch  Vin S Vout
 *.ipin S
 *.ipin Vin
@@ -99,8 +99,8 @@ x2 nS S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 
 
 * expanding   symbol:  4x1analogmux.sym # of pins=7
-** sym_path: /home/reg/saradcspr2022/4x1analogmux.sym
-** sch_path: /home/reg/saradcspr2022/4x1analogmux.sch
+** sym_path: /home/rperry/saradcspr2022/4x1analogmux.sym
+** sch_path: /home/rperry/saradcspr2022/4x1analogmux.sch
 .subckt 4x1analogmux  Vout S1 A3 A2 A1 A0 S0
 *.ipin A3
 *.ipin A2
@@ -116,8 +116,8 @@ x1 S1S0 A3 A2 S0 2x1analogmux
 
 
 * expanding   symbol:  2x1analogmux.sym # of pins=4
-** sym_path: /home/reg/saradcspr2022/2x1analogmux.sym
-** sch_path: /home/reg/saradcspr2022/2x1analogmux.sch
+** sym_path: /home/rperry/saradcspr2022/2x1analogmux.sym
+** sch_path: /home/rperry/saradcspr2022/2x1analogmux.sch
 .subckt 2x1analogmux  Vout A1 A0 S
 *.ipin S
 *.opin Vout
@@ -130,8 +130,8 @@ x3 nS S VDD GND not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=1
 
 
 * expanding   symbol:  caparray.sym # of pins=7
-** sym_path: /home/reg/saradcspr2022/caparray.sym
-** sch_path: /home/reg/saradcspr2022/caparray.sch
+** sym_path: /home/rperry/saradcspr2022/caparray.sym
+** sch_path: /home/rperry/saradcspr2022/caparray.sch
 .subckt caparray  vcommon  C0  C1  C2  C4  C8  C16
 *.iopin C0
 *.iopin C1
@@ -150,8 +150,8 @@ XC6 C16 vcommon sky130_fd_pr__cap_mim_m3_1 W=100 L=100 MF=16 m=16
 
 
 * expanding   symbol:  simpleComp.sym # of pins=5
-** sym_path: /home/reg/saradcspr2022/simpleComp.sym
-** sch_path: /home/reg/saradcspr2022/simpleComp.sch
+** sym_path: /home/rperry/saradcspr2022/simpleComp.sym
+** sch_path: /home/rperry/saradcspr2022/simpleComp.sch
 .subckt simpleComp  Vm Vp Vout VDDPIN GNDPIN
 *.ipin Vp
 *.ipin Vm
@@ -174,8 +174,8 @@ x1 Vout diffout VDDPIN GNDPIN not W_N=1 L_N=0.15 W_P=2 L_P=0.15 m=10
 
 
 * expanding   symbol:  dacpassgate.sym # of pins=4
-** sym_path: /home/reg/saradcspr2022/dacpassgate.sym
-** sch_path: /home/reg/saradcspr2022/dacpassgate.sch
+** sym_path: /home/rperry/saradcspr2022/dacpassgate.sym
+** sch_path: /home/rperry/saradcspr2022/dacpassgate.sch
 .subckt dacpassgate  GP A Z GN
 *.iopin A
 *.iopin Z
@@ -191,8 +191,8 @@ XM2 Z GP A VDD sky130_fd_pr__pfet_01v8 L=0.5 W=2 nf=1 ad='int((nf+1)/2) * W/nf *
 
 
 * expanding   symbol:  not.sym # of pins=2
-** sym_path: /home/reg/saradcspr2022/not.sym
-** sch_path: /home/reg/saradcspr2022/not.sch
+** sym_path: /home/rperry/saradcspr2022/not.sym
+** sch_path: /home/rperry/saradcspr2022/not.sch
 .subckt not  y a  VCCPIN  VSSPIN      W_N=1 L_N=0.15 W_P=2 L_P=0.15
 *.opin y
 *.ipin a
